@@ -6,3 +6,7 @@ Comparateur citoyen des propositions politiques pour la présidentielle françai
 Les consignes persistantes sont dans [AGENTS.md](AGENTS.md). Le [guide de travail](docs/codex-workflow.md) décrit les accès Linear/GitHub et le parcours ticket → branche → vérifications → commits → pull request.
 
 Le dépôt contient pour le moment la documentation de démarrage. Le socle Astro/TypeScript et ses commandes de validation seront ajoutés dans le ticket dédié. Les brouillons éditoriaux et signalements restent dans un espace privé ; seul le contenu approuvé peut rejoindre ce dépôt public.
+
+## Repository and service preparation
+
+[Repository and service access](docs/repository-and-service-access.md) records the POL-7 setup proposal, observed access checks, code license options, and remaining owner decisions. The code license has not yet been selected.
