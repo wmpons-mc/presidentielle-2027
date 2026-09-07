@@ -9,4 +9,8 @@ Le dépôt contient pour le moment la documentation de démarrage. Le socle Astr
 
 ## Repository and service preparation
 
-[Repository and service access](docs/repository-and-service-access.md) records the POL-7 setup proposal, observed access checks, code license options, and remaining owner decisions. The code license has not yet been selected.
+[Repository and service access](docs/repository-and-service-access.md) records the POL-7 setup proposal, observed access checks, code license decision, and remaining owner decisions.
+
+## License
+
+Original code and associated software documentation are licensed under the [MIT License](LICENSE), copyright (c) 2026 William Pons. Third-party sources, quotations, photographs and editorial material have separate rights and publication requirements.

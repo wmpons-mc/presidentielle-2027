@@ -9,7 +9,7 @@ Preparation record for [POL-7](https://linear.app/political-analysis/issue/POL-7
 | Code owner and technical name | GitHub repository metadata and Git remote | `wmpons-mc/presidentielle-2027`, owned by a personal account |
 | Code repository | [Existing repository](https://github.com/wmpons-mc/presidentielle-2027) | Public; default branch `main` |
 | Baseline | Remote HEAD and fetched `origin/main` | `a496f895717d79bd3c9c06f6c5bff2e1248767a9` |
-| Code license | Repository metadata and tracked files | No license adopted |
+| Code license | Owner confirmation and [LICENSE](../LICENSE) on the POL-7 branch | MIT; copyright (c) 2026 William Pons; pending PR merge |
 | Main protection | [Branch API](https://api.github.com/repos/wmpons-mc/presidentielle-2027/branches/main) | `protected: false` |
 | Rulesets | [Rulesets API](https://api.github.com/repos/wmpons-mc/presidentielle-2027/rulesets) | Empty list |
 | Detailed protection settings | Branch protection API | HTTP 403, integration lacks access; not evidence of plan eligibility |
@@ -21,9 +21,9 @@ The ticket has no native blockers and no comments at inspection. Its native depe
 
 ## Code license decision
 
-Propose **MIT** for original code, subject to the owner's explicit decision. It is short and permits broad reuse with preservation of its notice. Alternatives are [Apache-2.0](https://choosealicense.com/licenses/apache-2.0/), which includes explicit patent provisions, and [GPL-3.0](https://choosealicense.com/licenses/gpl-3.0/), which requires covered distributed derivatives to remain under the same license. See the [MIT terms](https://choosealicense.com/licenses/mit/).
+The owner explicitly selected **MIT** for original code and confirmed **William Pons** as the copyright holder on 2026-09-07, after MIT, Apache-2.0 and GPL-3.0 were presented. The standard [MIT License](../LICENSE) is included on this branch with copyright (c) 2026 William Pons.
 
-No `LICENSE` file is added until the owner chooses the license and confirms the copyright holder. Code licensing must not purport to license third-party quotations, source documents, photographs or personal data. Publication and reuse rules for editorial material remain separate; preserve attribution and source-specific rights.
+The license covers original code and associated software documentation. It does not grant rights to third-party quotations, source documents, photographs or personal data. Publication and reuse rules for editorial material remain separate; preserve attribution and source-specific rights.
 
 ## Private editorial repository
 
@@ -87,7 +87,7 @@ POL-13 must reserve the maximum cost before each paid call, persist a shared cou
 
 | Action | Evidence required before completion | Current state |
 | --- | --- | --- |
-| Choose MIT, Apache-2.0 or GPL-3.0 for code and confirm copyright holder | Explicit decision, followed by reviewed license file | Pending |
+| Code license and copyright holder | Explicit owner confirmation; [LICENSE](../LICENSE) | Decision complete: MIT, William Pons; file included in the PR |
 | Confirm proposed private repository identity or supply the existing one | Authenticated metadata showing `private: true`, and denied anonymous access | Pending; no repository creation tool or authenticated `gh` available |
 | Confirm GitHub plan and minimal access | Private review of collaborators/apps and actual protection availability; sanitized result only in public | Pending |
 | Decide and apply branch rules or acknowledge the manual private fallback | Read-back of configured rules, plus a controlled verification of blocked direct/force pushes using a disposable test ref or repository | Pending; no account-permission changes authorized |
@@ -97,4 +97,4 @@ POL-13 must reserve the maximum cost before each paid call, persist a shared cou
 
 Recheck repository visibility and access after creation and after every permission change. Authenticated access should succeed, anonymous private access should fail, and non-owner access should be absent unless explicitly approved. A 404 alone cannot distinguish a private repository from a missing one; pair it with authenticated metadata. Record timestamps and sanitized outcomes, not private data or raw account responses.
 
-POL-7 remains incomplete until the license decision, private repository preparation, plan/protection verification and account inventory have real evidence. Do not mark it Done based only on this document or the earlier Codex setup PR.
+The license decision is complete. POL-7 remains incomplete until private repository preparation, plan/protection verification and account inventory have real evidence and the deliverables are delivered. Do not mark it Done based only on this document or the earlier Codex setup PR.
