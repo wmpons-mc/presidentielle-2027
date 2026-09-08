@@ -13,7 +13,7 @@ Preparation record for [POL-7](https://linear.app/political-analysis/issue/POL-7
 | Main protection | [Branch API](https://api.github.com/repos/wmpons-mc/presidentielle-2027/branches/main) | `protected: false` |
 | Rulesets | [Rulesets API](https://api.github.com/repos/wmpons-mc/presidentielle-2027/rulesets) | Empty list |
 | Detailed protection settings | Branch protection API | HTTP 403, integration lacks access; not evidence of plan eligibility |
-| Editorial repository | Connected repository listing for the owner | [Existing editorial repository](https://github.com/wmpons-mc/presidentielle-2027-editorial), confirmed private by authenticated metadata on 2026-09-08; owner confirms no collaborators and Actions disabled; installed-app inventory and permissions reported by owner; access minimization remains outstanding |
+| Editorial repository | Connected repository listing for the owner | [Existing editorial repository](https://github.com/wmpons-mc/presidentielle-2027-editorial), confirmed private by authenticated metadata on 2026-09-08; owner confirms no collaborators and Actions disabled; installed-app inventory and permissions reported by owner; existing integration scope explicitly retained by owner |
 | Git and PR access | Remote read/fetch; GitHub connector | Git read works; PR creation capability available; local `gh` is absent |
 | Account plans and billing | No billing dashboard access | Owner confirms GitHub Free, Workers Free and sufficient OpenAI API project/billing access on 2026-09-08; provider dashboards were not independently inspected |
 
@@ -31,7 +31,7 @@ The owner supplied https://github.com/wmpons-mc/presidentielle-2027-editorial on
 
 The public repository makes the implementation and approved publication inspectable and reusable. The private repository supports preparation and owner review without exposing unfinished political claims or visitor submissions. Public branches and PRs cannot serve as a private review area. Publication must export only sanitized content approved for its exact version; linking to the private repository does not grant access to its contents.
 
-The owner confirms no collaborators and disabled Actions on 2026-09-08 (Actions tab hidden; workflows cannot run). The owner subsequently reported the repository selection and permissions for both installed GitHub Apps. The inventory is complete by owner report, not by an independent administrator API inspection. Current access exceeds the project-only scope proposed here; access minimization remains outstanding. Keep app identities and detailed access records private; this public record reports only the audit outcome. No application permissions were changed.
+The owner confirms no collaborators and disabled Actions on 2026-09-08 (Actions tab hidden; workflows cannot run). The owner subsequently reported the repository selection and permissions for both installed GitHub Apps. The inventory is complete by owner report, not by an independent administrator API inspection. The owner explicitly chose to retain the existing integration scope for use across projects on 2026-09-08. This is an accepted exception to the proposed project-only scope, not an unresolved decision. It does not authorize new installations, broader permissions or changes to publication controls. Keep app identities and detailed access records private; this public record reports only the audit outcome. No application permissions were changed.
 
 Initial configuration proposal:
 
@@ -73,7 +73,7 @@ For every future secret: create it directly in the provider and trusted secret s
 
 | Service | Required owner action | Cost position |
 | --- | --- | --- |
-| GitHub | Free, no collaborators and Actions disabled confirmed by owner; app inventory confirmed by owner; decide access minimization and verify future automation allowances | No upgrade authorized; private automation must fit verified allowances |
+| GitHub | Free, no collaborators and Actions disabled confirmed by owner; app inventory confirmed by owner; existing integration scope accepted by owner; verify future automation allowances | No upgrade authorized; private automation must fit verified allowances |
 | Cloudflare | Workers Free confirmed by owner; verify API token scope and D1 EU configuration when provisioning the relevant services | Start with available free allowances; no paid activation or deployment here |
 | OpenAI API | Owner confirms sufficient API project and billing access; no provider-side test performed; provision a restricted service credential only when needed | Paid processing disabled pending authorization and POL-13 controls |
 | ChatGPT | Record subscription separately in the private billing inventory | ChatGPT subscription and API billing are separate, as specified in the project architecture; do not count a subscription as API credit |
@@ -95,7 +95,7 @@ POL-13 must reserve the maximum cost before each paid call, persist a shared cou
 | --- | --- | --- |
 | Code license and copyright holder | Explicit owner confirmation; [LICENSE](../LICENSE) | Decision complete: MIT, William Pons; file included in the PR |
 | Private repository identity and visibility | Owner-provided URL and authenticated metadata reporting private visibility on 2026-09-08 | Existence/private visibility verified; anonymous access check remains pending |
-| GitHub plan and minimal access | GitHub Free, no collaborators and disabled Actions confirmed by owner | App inventory complete by owner report; access minimization outstanding; Pro deferred |
+| GitHub plan and minimal access | GitHub Free, no collaborators and disabled Actions confirmed by owner | App inventory complete by owner report; existing integration scope accepted by owner; Pro deferred |
 | Decide and apply branch rules or acknowledge the manual private fallback | Read-back of configured rules, plus a controlled verification of blocked direct/force pushes using a disposable test ref or repository | Pending; no account-permission changes authorized |
 | Identify Cloudflare account and plan | Owner confirms Workers/API access, D1 EU option and spending settings without sharing keys | Workers Free confirmed; D1 provisioning and token verification deferred to implementation |
 | Identify OpenAI API project and billing owner | Private project/service-account and billing check, separate from ChatGPT | API project/billing access confirmed by owner; no independent probe or paid call performed |
