@@ -13,9 +13,9 @@ Preparation record for [POL-7](https://linear.app/political-analysis/issue/POL-7
 | Main protection | [Branch API](https://api.github.com/repos/wmpons-mc/presidentielle-2027/branches/main) | `protected: false` |
 | Rulesets | [Rulesets API](https://api.github.com/repos/wmpons-mc/presidentielle-2027/rulesets) | Empty list |
 | Detailed protection settings | Branch protection API | HTTP 403, integration lacks access; not evidence of plan eligibility |
-| Editorial repository | Connected repository listing for the owner | [Existing editorial repository](https://github.com/wmpons-mc/presidentielle-2027-editorial), confirmed private by authenticated metadata on 2026-09-08; collaborator/app audit remains pending |
+| Editorial repository | Connected repository listing for the owner | [Existing editorial repository](https://github.com/wmpons-mc/presidentielle-2027-editorial), confirmed private by authenticated metadata on 2026-09-08; owner confirms no collaborators and Actions disabled; installed-app audit remains pending |
 | Git and PR access | Remote read/fetch; GitHub connector | Git read works; PR creation capability available; local `gh` is absent |
-| Account plans and billing | No billing dashboard access | Owner confirms GitHub Free, a newly created Cloudflare account and an existing OpenAI account on 2026-09-08; service permissions, API project and billing remain unverified |
+| Account plans and billing | No billing dashboard access | Owner confirms GitHub Free, Workers Free and sufficient OpenAI API project/billing access on 2026-09-08; provider dashboards were not independently inspected |
 
 The ticket has no native blockers and no comments at inspection. Its native dependents are POL-8, POL-13, POL-16 and POL-18. The architecture and work-order project documents were read. This preparation alone does not unblock them or satisfy Done.
 
@@ -30,6 +30,8 @@ The license covers original code and associated software documentation. It does 
 The owner supplied https://github.com/wmpons-mc/presidentielle-2027-editorial on 2026-09-08. The authenticated GitHub connector confirms that it exists under `wmpons-mc` with private visibility. No editorial content was retrieved during this verification.
 
 The public repository makes the implementation and approved publication inspectable and reusable. The private repository supports preparation and owner review without exposing unfinished political claims or visitor submissions. Public branches and PRs cannot serve as a private review area. Publication must export only sanitized content approved for its exact version; linking to the private repository does not grant access to its contents.
+
+The owner confirms no collaborators and disabled Actions on 2026-09-08 (Actions tab hidden; workflows cannot run). No apps were deliberately installed by the owner, but existing installations have not been checked. Do not interpret this as an empty app inventory.
 
 Initial configuration proposal:
 
@@ -71,13 +73,15 @@ For every future secret: create it directly in the provider and trusted secret s
 
 | Service | Required owner action | Cost position |
 | --- | --- | --- |
-| GitHub | Free confirmed; verify collaborators/apps, Actions allowance, storage usage and spending controls | No upgrade authorized; private automation must fit verified allowances |
-| Cloudflare | Account creation confirmed by owner; verify current Workers plan, API token capability and D1 EU jurisdiction availability | Start with available free allowances; no paid activation or deployment here |
-| OpenAI API | Existing OpenAI account confirmed by owner; identify API organization/project and billing owner; confirm access without running inference; provision a restricted service credential only when needed | Paid processing disabled pending authorization and POL-13 controls |
+| GitHub | Free, no collaborators and Actions disabled confirmed by owner; verify installed apps and future automation allowances | No upgrade authorized; private automation must fit verified allowances |
+| Cloudflare | Workers Free confirmed by owner; verify API token scope and D1 EU configuration when provisioning the relevant services | Start with available free allowances; no paid activation or deployment here |
+| OpenAI API | Owner confirms sufficient API project and billing access; no provider-side test performed; provision a restricted service credential only when needed | Paid processing disabled pending authorization and POL-13 controls |
 | ChatGPT | Record subscription separately in the private billing inventory | ChatGPT subscription and API billing are separate, as specified in the project architecture; do not count a subscription as API credit |
 | Domain | Confirm whether an existing domain will be used | No purchase or invented deployment URL; include annual cost divided by 12 if later approved |
 
 Static asset requests are free under Cloudflare's documented model, while Worker execution has separate limits and billing. This does not make the entire service free. D1 supports an EU jurisdiction, but that does not establish EU-only processing for the whole chain. [Static asset billing](https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/), [D1 location](https://developers.cloudflare.com/d1/configuration/data-location/).
+
+D1 is Cloudflare's managed SQL database, accessed by backend Workers. In this architecture it will store visitor corrections privately (POL-18) and persist the shared API cost ledger (POL-13). Git preserves versioned editorial files; D1 handles live submissions and transactional accounting. D1 is available on Workers Free within quotas. Creating a database is deferred to those implementation tickets, not required to identify the service in POL-7. [D1 overview](https://developers.cloudflare.com/d1/), [D1 pricing](https://developers.cloudflare.com/d1/platform/pricing/).
 
 GitHub private Actions usage and storage must be checked against the owner's actual allowance and existing consumption before scheduling collection. [GitHub Actions billing](https://docs.github.com/en/billing/concepts/product-billing/github-actions).
 
@@ -91,10 +95,10 @@ POL-13 must reserve the maximum cost before each paid call, persist a shared cou
 | --- | --- | --- |
 | Code license and copyright holder | Explicit owner confirmation; [LICENSE](../LICENSE) | Decision complete: MIT, William Pons; file included in the PR |
 | Private repository identity and visibility | Owner-provided URL and authenticated metadata reporting private visibility on 2026-09-08 | Existence/private visibility verified; anonymous access check remains pending |
-| GitHub plan and minimal access | GitHub Free confirmed by owner; private review of collaborators/apps still required | Plan decided; access audit pending; Pro deferred |
+| GitHub plan and minimal access | GitHub Free, no collaborators and disabled Actions confirmed by owner | Installed-app review pending; Pro deferred |
 | Decide and apply branch rules or acknowledge the manual private fallback | Read-back of configured rules, plus a controlled verification of blocked direct/force pushes using a disposable test ref or repository | Pending; no account-permission changes authorized |
-| Identify Cloudflare account and plan | Owner confirms Workers/API access, D1 EU option and spending settings without sharing keys | Account created, owner-confirmed; plan and service access pending |
-| Identify OpenAI API project and billing owner | Private project/service-account and billing check, separate from ChatGPT | OpenAI account exists, owner-confirmed; API project/billing access pending; no paid probe required |
+| Identify Cloudflare account and plan | Owner confirms Workers/API access, D1 EU option and spending settings without sharing keys | Workers Free confirmed; D1 provisioning and token verification deferred to implementation |
+| Identify OpenAI API project and billing owner | Private project/service-account and billing check, separate from ChatGPT | API project/billing access confirmed by owner; no independent probe or paid call performed |
 | Confirm the budget allocation and future activation | Explicit spending authorization plus observed POL-13 verification before paid calls | Future activation; not granted by preparation |
 
 Recheck repository visibility and access after creation and after every permission change. Authenticated access should succeed, anonymous private access should fail, and non-owner access should be absent unless explicitly approved. A 404 alone cannot distinguish a private repository from a missing one; pair it with authenticated metadata. Record timestamps and sanitized outcomes, not private data or raw account responses.
