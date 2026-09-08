@@ -1,6 +1,6 @@
 # Repository and service access
 
-Preparation record for [POL-7](https://linear.app/political-analysis/issue/POL-7/preparer-les-depots-et-les-acces-de-deploiement), initially checked on 2026-09-07 and updated on 2026-09-08. Protection observations below date from 2026-09-07; repository visibility was rechecked on 2026-09-08. This is a proposed setup with observed evidence, not a deployment or a completed access audit. No service purchase or paid API call is authorized here.
+Preparation record for [POL-7](https://linear.app/political-analysis/issue/POL-7/preparer-les-depots-et-les-acces-de-deploiement), initially checked on 2026-09-07 and updated on 2026-09-08. Protection observations below date from 2026-09-07; repository visibility was rechecked on 2026-09-08. This preparation record distinguishes verified metadata, owner-confirmed account settings and future implementation work. No service purchase or paid API call is authorized here.
 
 ## Observed state
 
@@ -9,7 +9,7 @@ Preparation record for [POL-7](https://linear.app/political-analysis/issue/POL-7
 | Code owner and technical name | GitHub repository metadata and Git remote | `wmpons-mc/presidentielle-2027`, owned by a personal account |
 | Code repository | [Existing repository](https://github.com/wmpons-mc/presidentielle-2027) | Public; default branch `main` |
 | Baseline | Remote HEAD and fetched `origin/main` | `a496f895717d79bd3c9c06f6c5bff2e1248767a9` |
-| Code license | Owner confirmation and [LICENSE](../LICENSE) on the POL-7 branch | MIT; copyright (c) 2026 William Pons; pending PR merge |
+| Code license | Owner confirmation and [LICENSE](../LICENSE) on the POL-7 branch | MIT; copyright (c) 2026 William Pons |
 | Main protection | [Branch API](https://api.github.com/repos/wmpons-mc/presidentielle-2027/branches/main) | `protected: false` |
 | Rulesets | [Rulesets API](https://api.github.com/repos/wmpons-mc/presidentielle-2027/rulesets) | Empty list |
 | Detailed protection settings | Branch protection API | HTTP 403, integration lacks access; not evidence of plan eligibility |
@@ -17,7 +17,7 @@ Preparation record for [POL-7](https://linear.app/political-analysis/issue/POL-7
 | Git and PR access | Remote read/fetch; GitHub connector | Git read works; PR creation capability available; local `gh` is absent |
 | Account plans and billing | No billing dashboard access | Owner confirms GitHub Free, Workers Free and sufficient OpenAI API project/billing access on 2026-09-08; provider dashboards were not independently inspected |
 
-The ticket has no native blockers and no comments at inspection. Its native dependents are POL-8, POL-13, POL-16 and POL-18. The architecture and work-order project documents were read. This preparation alone does not unblock them or satisfy Done.
+The ticket has no native blockers and no comments at inspection. Its native dependents are POL-8, POL-13, POL-16 and POL-18. The architecture and work-order project documents were read. Other native prerequisites still apply to dependent tickets.
 
 ## Code license decision
 
@@ -35,8 +35,8 @@ The owner confirms no collaborators and disabled Actions on 2026-09-08 (Actions 
 
 Initial configuration proposal:
 
-1. Owner access only; no collaborators, outside invitations or broad app installations. Confirm account recovery and two-factor authentication privately.
-2. Initialize a private README describing data boundaries, ownership and the access register. Keep Actions disabled until the workflows and their permission boundaries have been reviewed.
+1. No collaborators or new invitations; retain the existing integrations as explicitly chosen by the owner. Confirm account recovery and two-factor authentication privately.
+2. Document data boundaries and the access register alongside the private editorial implementation in POL-8/POL-16. Keep Actions disabled until the workflows and their permission boundaries have been reviewed.
 3. Keep drafts, admissible working sources, approval records, review artifacts and correction history there. Visitor submissions are received in private D1; any editorial copy stays private.
 4. Use a separate local checkout outside this public repository. Do not use public branches, PRs, Actions artifacts, logs, Pages or unauthenticated previews for private material. `.gitignore` is not an access control.
 5. The owner authorizes documenting both repository URLs publicly in AGENTS.md. Keep installed-app details, access review records and account-specific information private; publish only sanitized verification outcomes.
@@ -47,7 +47,7 @@ GitHub documents protected branches for public repositories on Free, and private
 
 For public `main`, propose requiring PRs, preventing force pushes and deletion, and applying the rules to administrators where supported. Add only observed CI check names after POL-9 introduces and runs CI. For a sole maintainer, requiring another approving reviewer can prevent all merges; choose the review rule explicitly. Code PR approval does not replace exact-version editorial approval.
 
-For the private repository, verify Settings → Branches / Rules against the actual plan before claiming enforcement. On Free, keep an owner-only manual workflow if private protections are unavailable. This fallback does **not** enforce branch protection or permit autonomous privileged writers. Keep collection/publication credentials disconnected until POL-16/POL-17 provide a reviewed separation of authority. A paid upgrade is an owner decision and is not part of this task.
+For the private repository, GitHub Free does not include protected branches according to the official plan documentation, rechecked on 2026-09-08. Keep owner-led manual review and Actions disabled at this preparation stage, with the existing integrations retained by explicit owner decision. This fallback does **not** enforce branch protection or permit autonomous privileged writers. Keep collection/publication credentials disconnected until POL-16/POL-17 provide a reviewed separation of authority. A paid upgrade is an owner decision and is not part of this task.
 
 ## Proposed minimum permissions and secret inventory
 
@@ -89,18 +89,24 @@ Project ceiling: **€50/month total**, with an initial measured target of **€
 
 POL-13 must reserve the maximum cost before each paid call, persist a shared counter, bound input/output and retries, and reject new paid work if accounting is unavailable. Provider alerts and limits complement this control. Model choice and a priced evaluation belong to POL-14/POL-15. [OpenAI API pricing](https://developers.openai.com/api/docs/pricing), [production guidance](https://developers.openai.com/api/docs/guides/production-best-practices).
 
-## Remaining owner actions and completion evidence
+## Completion evidence and implementation handoff
 
-| Action | Evidence required before completion | Current state |
-| --- | --- | --- |
-| Code license and copyright holder | Explicit owner confirmation; [LICENSE](../LICENSE) | Decision complete: MIT, William Pons; file included in the PR |
-| Private repository identity and visibility | Owner-provided URL and authenticated metadata reporting private visibility on 2026-09-08 | Existence/private visibility verified; anonymous access check remains pending |
-| GitHub plan and minimal access | GitHub Free, no collaborators and disabled Actions confirmed by owner | App inventory complete by owner report; existing integration scope accepted by owner; Pro deferred |
-| Decide and apply branch rules or acknowledge the manual private fallback | Read-back of configured rules, plus a controlled verification of blocked direct/force pushes using a disposable test ref or repository | Pending; no account-permission changes authorized |
-| Identify Cloudflare account and plan | Owner confirms Workers/API access, D1 EU option and spending settings without sharing keys | Workers Free confirmed; D1 provisioning and token verification deferred to implementation |
-| Identify OpenAI API project and billing owner | Private project/service-account and billing check, separate from ChatGPT | API project/billing access confirmed by owner; no independent probe or paid call performed |
-| Confirm the budget allocation and future activation | Explicit spending authorization plus observed POL-13 verification before paid calls | Future activation; not granted by preparation |
+POL-7 prepares repositories and inventories access; it does not provision the application or activate paid processing.
 
-Recheck repository visibility and access after creation and after every permission change. Authenticated access should succeed, anonymous private access should fail, and non-owner access should be absent unless explicitly approved. A 404 alone cannot distinguish a private repository from a missing one; pair it with authenticated metadata. Record timestamps and sanitized outcomes, not private data or raw account responses.
+| Acceptance criterion | Evidence |
+| --- | --- |
+| Owner, technical names and code license | Both repository URLs in AGENTS.md; MIT explicitly selected by owner before LICENSE was added |
+| Private editorial space, permissions and secrets | Authenticated metadata confirms private visibility; unauthenticated GitHub API request returned HTTP 404 on 2026-09-08. Owner confirms no collaborators and disabled Actions; existing integration scope explicitly retained. Future minimum permissions, secret storage and rotation are documented above; no secret values included |
+| Cloudflare/API accounts and billing envelope | Owner confirms Workers Free and sufficient OpenAI API project/billing access. Separate ChatGPT/API billing and total €50/month ceiling are documented. No paid probe was performed |
+| Visibility and protection availability | Public/private metadata verified; anonymous private access denied. GitHub Free supports public protected branches but not private protected branches. Public main was observed unprotected; no claim of enforcement or administrator-setting change |
 
-The license decision is complete. POL-7 remains incomplete until private repository preparation, plan/protection verification and account inventory have real evidence and the deliverables are delivered. Do not mark it Done based only on this document or the earlier Codex setup PR.
+The remaining actions belong to implementation and activation:
+
+- POL-9: introduce CI, then configure public branch rules with real check names under the repository workflow and appropriate administrator authorization.
+- POL-8/POL-16/POL-17: implement private editorial storage, exact-version approval and controlled export; establish enforceable separation before enabling privileged automation on the selected plan.
+- POL-13/POL-14: provision narrowly scoped credentials when needed, verify provider access and implement the persistent budget guard before any explicitly authorized paid processing.
+- POL-18: provision the corrections Worker and D1, checking EU jurisdiction and account permissions at that time.
+- POL-20: verify Actions allowances and spending controls before enabling scheduled private workflows.
+- Before deployment: confirm domain choice and any purchase separately. GitHub Pro remains optional and deferred.
+
+Recheck visibility and access after permission changes. Provider account readiness is based on owner confirmation; provider dashboards and app permissions were not independently audited. POL-7 delivery requires the preparation PR to be merged and that result observed before updating Linear to Done.
