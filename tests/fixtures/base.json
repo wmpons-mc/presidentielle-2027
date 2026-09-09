@@ -1,0 +1,427 @@
+{
+  "schemaVersion": "1.0.0",
+  "datasetId": "fiction.dataset",
+  "fixture": true,
+  "content": {
+    "actors": [
+      {
+        "id": "fiction.actor.a",
+        "version": 1,
+        "availability": "active",
+        "editorialState": "draft",
+        "privateNotes": "Fictional private note",
+        "change": {
+          "kind": "initial",
+          "previous": null,
+          "date": "2026-01-01",
+          "description": "Fictional initial record"
+        },
+        "kind": "person",
+        "name": "Fictional Person A",
+        "candidateStatuses": [
+          {
+            "status": "unknown",
+            "date": "2026-01-01",
+            "evidenceRefs": []
+          }
+        ]
+      }
+    ],
+    "topics": [
+      {
+        "id": "fiction.topic.1",
+        "version": 1,
+        "availability": "active",
+        "editorialState": "draft",
+        "privateNotes": "Fictional private note",
+        "change": {
+          "kind": "initial",
+          "previous": null,
+          "date": "2026-01-01",
+          "description": "Fictional initial record"
+        },
+        "label": "Fictional topic 1"
+      },
+      {
+        "id": "fiction.topic.2",
+        "version": 1,
+        "availability": "active",
+        "editorialState": "draft",
+        "privateNotes": "Fictional private note",
+        "change": {
+          "kind": "initial",
+          "previous": null,
+          "date": "2026-01-01",
+          "description": "Fictional initial record"
+        },
+        "label": "Fictional topic 2"
+      },
+      {
+        "id": "fiction.topic.3",
+        "version": 1,
+        "availability": "active",
+        "editorialState": "draft",
+        "privateNotes": "Fictional private note",
+        "change": {
+          "kind": "initial",
+          "previous": null,
+          "date": "2026-01-01",
+          "description": "Fictional initial record"
+        },
+        "label": "Fictional topic 3"
+      }
+    ],
+    "questions": [
+      {
+        "id": "fiction.question.1",
+        "version": 1,
+        "availability": "active",
+        "editorialState": "draft",
+        "privateNotes": "Fictional private note",
+        "change": {
+          "kind": "initial",
+          "previous": null,
+          "date": "2026-01-01",
+          "description": "Fictional initial record"
+        },
+        "topicRef": {
+          "id": "fiction.topic.1",
+          "version": 1
+        },
+        "label": "Fictional question 1",
+        "rubricVersion": "0.1",
+        "definition": {
+          "meaning": "A wholly fictional comparison exercise",
+          "includes": [
+            "Explicit fictional action"
+          ],
+          "excludes": [
+            "Unrelated claim"
+          ],
+          "overlapRules": [
+            "Keep one canonical proposition"
+          ],
+          "comparisonFields": [
+            "quantity"
+          ],
+          "units": [
+            "tokens per month"
+          ],
+          "examples": {
+            "positive": [
+              "Fictional explicit action"
+            ],
+            "negative": [
+              "Fictional unrelated action"
+            ],
+            "ambiguous": [
+              "Fictional unclear action"
+            ]
+          }
+        },
+        "reexaminePropositionRefs": []
+      },
+      {
+        "id": "fiction.question.2",
+        "version": 1,
+        "availability": "active",
+        "editorialState": "draft",
+        "privateNotes": "Fictional private note",
+        "change": {
+          "kind": "initial",
+          "previous": null,
+          "date": "2026-01-01",
+          "description": "Fictional initial record"
+        },
+        "topicRef": {
+          "id": "fiction.topic.2",
+          "version": 1
+        },
+        "label": "Fictional question 2",
+        "rubricVersion": "0.1",
+        "definition": {
+          "meaning": "A wholly fictional comparison exercise",
+          "includes": [
+            "Explicit fictional action"
+          ],
+          "excludes": [
+            "Unrelated claim"
+          ],
+          "overlapRules": [
+            "Keep one canonical proposition"
+          ],
+          "comparisonFields": [
+            "quantity"
+          ],
+          "units": [
+            "tokens per month"
+          ],
+          "examples": {
+            "positive": [
+              "Fictional explicit action"
+            ],
+            "negative": [
+              "Fictional unrelated action"
+            ],
+            "ambiguous": [
+              "Fictional unclear action"
+            ]
+          }
+        },
+        "reexaminePropositionRefs": []
+      },
+      {
+        "id": "fiction.question.3",
+        "version": 1,
+        "availability": "active",
+        "editorialState": "draft",
+        "privateNotes": "Fictional private note",
+        "change": {
+          "kind": "initial",
+          "previous": null,
+          "date": "2026-01-01",
+          "description": "Fictional initial record"
+        },
+        "topicRef": {
+          "id": "fiction.topic.3",
+          "version": 1
+        },
+        "label": "Fictional question 3",
+        "rubricVersion": "0.1",
+        "definition": {
+          "meaning": "A wholly fictional comparison exercise",
+          "includes": [
+            "Explicit fictional action"
+          ],
+          "excludes": [
+            "Unrelated claim"
+          ],
+          "overlapRules": [
+            "Keep one canonical proposition"
+          ],
+          "comparisonFields": [
+            "quantity"
+          ],
+          "units": [
+            "tokens per month"
+          ],
+          "examples": {
+            "positive": [
+              "Fictional explicit action"
+            ],
+            "negative": [
+              "Fictional unrelated action"
+            ],
+            "ambiguous": [
+              "Fictional unclear action"
+            ]
+          }
+        },
+        "reexaminePropositionRefs": []
+      }
+    ],
+    "sources": [
+      {
+        "id": "fiction.source.a",
+        "version": 1,
+        "availability": "active",
+        "editorialState": "draft",
+        "privateNotes": "Fictional private note",
+        "change": {
+          "kind": "initial",
+          "previous": null,
+          "date": "2026-01-01",
+          "description": "Fictional initial record"
+        },
+        "authorRef": {
+          "id": "fiction.actor.a",
+          "version": 1
+        },
+        "url": "https://example.org/fiction/a",
+        "title": "Fictional source A",
+        "support": "personal_announcement",
+        "publishedAt": {
+          "state": "known",
+          "value": "2026-01-01"
+        },
+        "accessedAt": "2026-01-02",
+        "electionYear": {
+          "state": "unknown"
+        },
+        "contentDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "fullText": "PRIVATE FICTIONAL FULL SOURCE",
+        "rightsNotes": "Fictional rights review only"
+      }
+    ],
+    "citations": [
+      {
+        "id": "fiction.citation.a",
+        "version": 1,
+        "availability": "active",
+        "editorialState": "draft",
+        "privateNotes": "Fictional private note",
+        "change": {
+          "kind": "initial",
+          "previous": null,
+          "date": "2026-01-01",
+          "description": "Fictional initial record"
+        },
+        "sourceRef": {
+          "id": "fiction.source.a",
+          "version": 1
+        },
+        "speakerRef": {
+          "id": "fiction.actor.a",
+          "version": 1
+        },
+        "fragments": [
+          {
+            "text": "If the fictional reserve permits, I will add 30 tokens per month.",
+            "locator": {
+              "kind": "section",
+              "value": "Fictional section 2"
+            },
+            "omissionBefore": false,
+            "omissionAfter": false
+          }
+        ]
+      }
+    ],
+    "propositions": [
+      {
+        "id": "fiction.proposition.a",
+        "version": 1,
+        "availability": "active",
+        "editorialState": "draft",
+        "privateNotes": "Fictional private note",
+        "change": {
+          "kind": "initial",
+          "previous": null,
+          "date": "2026-01-01",
+          "description": "Fictional initial record"
+        },
+        "authorRef": {
+          "id": "fiction.actor.a",
+          "version": 1
+        },
+        "questionRefs": [
+          {
+            "id": "fiction.question.1",
+            "version": 1
+          },
+          {
+            "id": "fiction.question.2",
+            "version": 1
+          }
+        ],
+        "citationRefs": [
+          {
+            "id": "fiction.citation.a",
+            "version": 1
+          }
+        ],
+        "summary": "Fictional proposal to add 30 tokens monthly if the reserve permits.",
+        "nature": "measure",
+        "action": "propose",
+        "modality": "explicit_condition",
+        "attribution": {
+          "kind": "direct",
+          "attributedTo": {
+            "id": "fiction.actor.a",
+            "version": 1
+          },
+          "proofCitationRefs": []
+        },
+        "statementDate": {
+          "state": "known",
+          "value": "2026-01-01"
+        },
+        "rubricVersion": "0.1",
+        "population": {
+          "state": "unknown"
+        },
+        "territory": {
+          "state": "unknown"
+        },
+        "conditions": {
+          "state": "known",
+          "value": "Only if the fictional reserve permits"
+        },
+        "schedule": {
+          "state": "unknown"
+        },
+        "funding": {
+          "state": "unknown"
+        },
+        "parameters": [
+          {
+            "name": "amount",
+            "value": {
+              "state": "known",
+              "value": "30"
+            },
+            "unit": {
+              "state": "known",
+              "value": "tokens"
+            },
+            "frequency": {
+              "state": "known",
+              "value": "monthly"
+            },
+            "quantityKind": {
+              "state": "known",
+              "value": "increment"
+            },
+            "basis": {
+              "state": "unknown"
+            },
+            "referencePeriod": {
+              "state": "unknown"
+            },
+            "duration": {
+              "state": "unknown"
+            }
+          }
+        ],
+        "relatedPropositionRefs": []
+      }
+    ],
+    "coverage": [
+      {
+        "id": "fiction.coverage.a",
+        "version": 1,
+        "availability": "active",
+        "editorialState": "draft",
+        "privateNotes": "Fictional private note",
+        "change": {
+          "kind": "initial",
+          "previous": null,
+          "date": "2026-01-01",
+          "description": "Fictional initial record"
+        },
+        "actorRef": {
+          "id": "fiction.actor.a",
+          "version": 1
+        },
+        "questionRef": {
+          "id": "fiction.question.3",
+          "version": 1
+        },
+        "state": "examined_no_measure",
+        "sourceRefs": [
+          {
+            "id": "fiction.source.a",
+            "version": 1
+          }
+        ],
+        "asOf": "2026-01-02",
+        "detail": "No measure identified in the examined fictional corpus."
+      }
+    ]
+  },
+  "review": {
+    "state": "draft",
+    "approval": null
+  },
+  "privateNotes": "PRIVATE FICTIONAL DATASET NOTES"
+}

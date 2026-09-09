@@ -1,0 +1,1528 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "datasetId": {
+      "$ref": "#/$defs/__schema0"
+    },
+    "fixture": {
+      "type": "boolean"
+    },
+    "content": {
+      "type": "object",
+      "properties": {
+        "actors": {
+          "maxItems": 10000,
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema1"
+          }
+        },
+        "topics": {
+          "maxItems": 10000,
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema12"
+          }
+        },
+        "questions": {
+          "maxItems": 10000,
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema13"
+          }
+        },
+        "sources": {
+          "maxItems": 10000,
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema14"
+          }
+        },
+        "citations": {
+          "maxItems": 10000,
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema18"
+          }
+        },
+        "propositions": {
+          "maxItems": 10000,
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema20"
+          }
+        },
+        "coverage": {
+          "maxItems": 10000,
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema21"
+          }
+        }
+      },
+      "required": [
+        "actors",
+        "topics",
+        "questions",
+        "sources",
+        "citations",
+        "propositions",
+        "coverage"
+      ],
+      "additionalProperties": false
+    },
+    "review": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/__schema10"
+        },
+        "approval": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "digest": {
+                  "$ref": "#/$defs/__schema17"
+                },
+                "reviewerId": {
+                  "$ref": "#/$defs/__schema0"
+                },
+                "reviewedAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+                }
+              },
+              "required": [
+                "digest",
+                "reviewerId",
+                "reviewedAt"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "state",
+        "approval"
+      ],
+      "additionalProperties": false
+    },
+    "privateNotes": {
+      "type": "string",
+      "maxLength": 20000
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "datasetId",
+    "fixture",
+    "content",
+    "review",
+    "privateNotes"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "__schema0": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9._-]{0,119}$"
+    },
+    "__schema1": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "version": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "availability": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "change": {
+          "$ref": "#/$defs/__schema4"
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "person",
+            "organization"
+          ]
+        },
+        "name": {
+          "$ref": "#/$defs/__schema7"
+        },
+        "candidateStatuses": {
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema8"
+          }
+        },
+        "editorialState": {
+          "$ref": "#/$defs/__schema10"
+        },
+        "privateNotes": {
+          "$ref": "#/$defs/__schema11"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "availability",
+        "change",
+        "kind",
+        "name",
+        "candidateStatuses",
+        "editorialState",
+        "privateNotes"
+      ],
+      "additionalProperties": false
+    },
+    "__schema2": {
+      "type": "integer",
+      "exclusiveMinimum": 0,
+      "maximum": 9007199254740991
+    },
+    "__schema3": {
+      "type": "string",
+      "enum": [
+        "active",
+        "inactive",
+        "withdrawn"
+      ]
+    },
+    "__schema4": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "initial",
+            "political_change",
+            "clarification",
+            "editorial_correction",
+            "withdrawal",
+            "unresolved_divergence",
+            "activation",
+            "deactivation",
+            "definition_change"
+          ]
+        },
+        "previous": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/__schema5"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "date": {
+          "$ref": "#/$defs/__schema6"
+        },
+        "description": {
+          "$ref": "#/$defs/__schema7"
+        }
+      },
+      "required": [
+        "kind",
+        "previous",
+        "date",
+        "description"
+      ],
+      "additionalProperties": false
+    },
+    "__schema5": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "version": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "required": [
+        "id",
+        "version"
+      ],
+      "additionalProperties": false
+    },
+    "__schema6": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+    },
+    "__schema7": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 20000,
+      "pattern": "\\S"
+    },
+    "__schema8": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "unknown",
+            "declared",
+            "nominated",
+            "primary",
+            "official",
+            "withdrawn",
+            "not_candidate"
+          ]
+        },
+        "date": {
+          "$ref": "#/$defs/__schema6"
+        },
+        "evidenceRefs": {
+          "$ref": "#/$defs/__schema9"
+        }
+      },
+      "required": [
+        "status",
+        "date",
+        "evidenceRefs"
+      ],
+      "additionalProperties": false
+    },
+    "__schema9": {
+      "maxItems": 10000,
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/__schema5"
+      }
+    },
+    "__schema10": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "in_review",
+        "approved",
+        "published",
+        "withdrawn"
+      ]
+    },
+    "__schema11": {
+      "type": "string",
+      "maxLength": 20000
+    },
+    "__schema12": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "version": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "availability": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "change": {
+          "$ref": "#/$defs/__schema4"
+        },
+        "label": {
+          "$ref": "#/$defs/__schema7"
+        },
+        "editorialState": {
+          "$ref": "#/$defs/__schema10"
+        },
+        "privateNotes": {
+          "$ref": "#/$defs/__schema11"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "availability",
+        "change",
+        "label",
+        "editorialState",
+        "privateNotes"
+      ],
+      "additionalProperties": false
+    },
+    "__schema13": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "version": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "availability": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "change": {
+          "$ref": "#/$defs/__schema4"
+        },
+        "topicRef": {
+          "$ref": "#/$defs/__schema5"
+        },
+        "label": {
+          "$ref": "#/$defs/__schema7"
+        },
+        "rubricVersion": {
+          "$ref": "#/$defs/__schema7"
+        },
+        "editorialState": {
+          "$ref": "#/$defs/__schema10"
+        },
+        "privateNotes": {
+          "$ref": "#/$defs/__schema11"
+        },
+        "definition": {
+          "type": "object",
+          "properties": {
+            "meaning": {
+              "$ref": "#/$defs/__schema7"
+            },
+            "includes": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/__schema7"
+              }
+            },
+            "excludes": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/__schema7"
+              }
+            },
+            "overlapRules": {
+              "minItems": 1,
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/__schema7"
+              }
+            },
+            "comparisonFields": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/__schema7"
+              }
+            },
+            "units": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/__schema7"
+              }
+            },
+            "examples": {
+              "type": "object",
+              "properties": {
+                "positive": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/__schema7"
+                  }
+                },
+                "negative": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/__schema7"
+                  }
+                },
+                "ambiguous": {
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/__schema7"
+                  }
+                }
+              },
+              "required": [
+                "positive",
+                "negative",
+                "ambiguous"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "meaning",
+            "includes",
+            "excludes",
+            "overlapRules",
+            "comparisonFields",
+            "units",
+            "examples"
+          ],
+          "additionalProperties": false
+        },
+        "reexaminePropositionRefs": {
+          "$ref": "#/$defs/__schema9"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "availability",
+        "change",
+        "topicRef",
+        "label",
+        "rubricVersion",
+        "editorialState",
+        "privateNotes",
+        "definition",
+        "reexaminePropositionRefs"
+      ],
+      "additionalProperties": false
+    },
+    "__schema14": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "version": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "availability": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "change": {
+          "$ref": "#/$defs/__schema4"
+        },
+        "authorRef": {
+          "$ref": "#/$defs/__schema5"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "title": {
+          "$ref": "#/$defs/__schema7"
+        },
+        "support": {
+          "type": "string",
+          "enum": [
+            "campaign_program",
+            "party_program",
+            "personal_announcement",
+            "spokesperson_statement",
+            "discussion_document",
+            "historical_document"
+          ]
+        },
+        "publishedAt": {
+          "$ref": "#/$defs/__schema15"
+        },
+        "accessedAt": {
+          "$ref": "#/$defs/__schema6"
+        },
+        "electionYear": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string",
+                  "const": "known"
+                },
+                "value": {
+                  "type": "integer",
+                  "minimum": 1900,
+                  "maximum": 9999
+                }
+              },
+              "required": [
+                "state",
+                "value"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "$ref": "#/$defs/__schema16"
+            }
+          ]
+        },
+        "contentDigest": {
+          "$ref": "#/$defs/__schema17"
+        },
+        "editorialState": {
+          "$ref": "#/$defs/__schema10"
+        },
+        "privateNotes": {
+          "$ref": "#/$defs/__schema11"
+        },
+        "fullText": {
+          "type": "string",
+          "maxLength": 1000000
+        },
+        "rightsNotes": {
+          "type": "string",
+          "maxLength": 20000
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "availability",
+        "change",
+        "authorRef",
+        "url",
+        "title",
+        "support",
+        "publishedAt",
+        "accessedAt",
+        "electionYear",
+        "contentDigest",
+        "editorialState",
+        "privateNotes",
+        "fullText",
+        "rightsNotes"
+      ],
+      "additionalProperties": false
+    },
+    "__schema15": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "state": {
+              "type": "string",
+              "const": "known"
+            },
+            "value": {
+              "$ref": "#/$defs/__schema6"
+            }
+          },
+          "required": [
+            "state",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "$ref": "#/$defs/__schema16"
+        }
+      ]
+    },
+    "__schema16": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "type": "string",
+          "const": "unknown"
+        }
+      },
+      "required": [
+        "state"
+      ],
+      "additionalProperties": false
+    },
+    "__schema17": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "__schema18": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "version": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "availability": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "change": {
+          "$ref": "#/$defs/__schema4"
+        },
+        "sourceRef": {
+          "$ref": "#/$defs/__schema5"
+        },
+        "speakerRef": {
+          "$ref": "#/$defs/__schema5"
+        },
+        "fragments": {
+          "minItems": 1,
+          "maxItems": 100,
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/__schema19"
+          }
+        },
+        "editorialState": {
+          "$ref": "#/$defs/__schema10"
+        },
+        "privateNotes": {
+          "$ref": "#/$defs/__schema11"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "availability",
+        "change",
+        "sourceRef",
+        "speakerRef",
+        "fragments",
+        "editorialState",
+        "privateNotes"
+      ],
+      "additionalProperties": false
+    },
+    "__schema19": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "$ref": "#/$defs/__schema7"
+        },
+        "locator": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "page",
+                "section",
+                "paragraph",
+                "timestamp"
+              ]
+            },
+            "value": {
+              "$ref": "#/$defs/__schema7"
+            }
+          },
+          "required": [
+            "kind",
+            "value"
+          ],
+          "additionalProperties": false
+        },
+        "omissionBefore": {
+          "type": "boolean"
+        },
+        "omissionAfter": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "text",
+        "locator",
+        "omissionBefore",
+        "omissionAfter"
+      ],
+      "additionalProperties": false
+    },
+    "__schema20": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "version": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "availability": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "change": {
+          "$ref": "#/$defs/__schema4"
+        },
+        "authorRef": {
+          "$ref": "#/$defs/__schema5"
+        },
+        "questionRefs": {
+          "minItems": 1,
+          "$ref": "#/$defs/__schema9"
+        },
+        "citationRefs": {
+          "minItems": 1,
+          "$ref": "#/$defs/__schema9"
+        },
+        "summary": {
+          "$ref": "#/$defs/__schema7"
+        },
+        "nature": {
+          "type": "string",
+          "enum": [
+            "measure",
+            "objective",
+            "diagnosis",
+            "third_party_evaluation",
+            "undetermined"
+          ]
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "propose",
+            "support",
+            "maintain",
+            "modify",
+            "repeal",
+            "reject",
+            "no_position",
+            "unknown"
+          ]
+        },
+        "modality": {
+          "type": "string",
+          "enum": [
+            "commitment",
+            "explicit_condition",
+            "under_study",
+            "illustrative_hypothesis",
+            "ambiguous"
+          ]
+        },
+        "attribution": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "direct",
+                "mandated_spokesperson",
+                "organization",
+                "quoted_third_party",
+                "unestablished"
+              ]
+            },
+            "attributedTo": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/__schema5"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "proofCitationRefs": {
+              "$ref": "#/$defs/__schema9"
+            }
+          },
+          "required": [
+            "kind",
+            "attributedTo",
+            "proofCitationRefs"
+          ],
+          "additionalProperties": false
+        },
+        "statementDate": {
+          "$ref": "#/$defs/__schema15"
+        },
+        "rubricVersion": {
+          "$ref": "#/$defs/__schema7"
+        },
+        "population": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string",
+                  "const": "known"
+                },
+                "value": {
+                  "$ref": "#/$defs/__schema7"
+                }
+              },
+              "required": [
+                "state",
+                "value"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "$ref": "#/$defs/__schema16"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string",
+                  "const": "absent"
+                },
+                "reason": {
+                  "$ref": "#/$defs/__schema7"
+                },
+                "evidenceRefs": {
+                  "minItems": 1,
+                  "$ref": "#/$defs/__schema9"
+                }
+              },
+              "required": [
+                "state",
+                "reason",
+                "evidenceRefs"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "territory": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string",
+                  "const": "known"
+                },
+                "value": {
+                  "$ref": "#/$defs/__schema7"
+                }
+              },
+              "required": [
+                "state",
+                "value"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "$ref": "#/$defs/__schema16"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string",
+                  "const": "absent"
+                },
+                "reason": {
+                  "$ref": "#/$defs/__schema7"
+                },
+                "evidenceRefs": {
+                  "minItems": 1,
+                  "$ref": "#/$defs/__schema9"
+                }
+              },
+              "required": [
+                "state",
+                "reason",
+                "evidenceRefs"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "conditions": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string",
+                  "const": "known"
+                },
+                "value": {
+                  "$ref": "#/$defs/__schema7"
+                }
+              },
+              "required": [
+                "state",
+                "value"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "$ref": "#/$defs/__schema16"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string",
+                  "const": "absent"
+                },
+                "reason": {
+                  "$ref": "#/$defs/__schema7"
+                },
+                "evidenceRefs": {
+                  "minItems": 1,
+                  "$ref": "#/$defs/__schema9"
+                }
+              },
+              "required": [
+                "state",
+                "reason",
+                "evidenceRefs"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "schedule": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string",
+                  "const": "known"
+                },
+                "value": {
+                  "$ref": "#/$defs/__schema7"
+                }
+              },
+              "required": [
+                "state",
+                "value"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "$ref": "#/$defs/__schema16"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string",
+                  "const": "absent"
+                },
+                "reason": {
+                  "$ref": "#/$defs/__schema7"
+                },
+                "evidenceRefs": {
+                  "minItems": 1,
+                  "$ref": "#/$defs/__schema9"
+                }
+              },
+              "required": [
+                "state",
+                "reason",
+                "evidenceRefs"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "funding": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string",
+                  "const": "known"
+                },
+                "value": {
+                  "$ref": "#/$defs/__schema7"
+                }
+              },
+              "required": [
+                "state",
+                "value"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "$ref": "#/$defs/__schema16"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "state": {
+                  "type": "string",
+                  "const": "absent"
+                },
+                "reason": {
+                  "$ref": "#/$defs/__schema7"
+                },
+                "evidenceRefs": {
+                  "minItems": 1,
+                  "$ref": "#/$defs/__schema9"
+                }
+              },
+              "required": [
+                "state",
+                "reason",
+                "evidenceRefs"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "$ref": "#/$defs/__schema7"
+              },
+              "value": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "state": {
+                        "type": "string",
+                        "const": "known"
+                      },
+                      "value": {
+                        "$ref": "#/$defs/__schema7"
+                      }
+                    },
+                    "required": [
+                      "state",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "$ref": "#/$defs/__schema16"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "state": {
+                        "type": "string",
+                        "const": "absent"
+                      },
+                      "reason": {
+                        "$ref": "#/$defs/__schema7"
+                      },
+                      "evidenceRefs": {
+                        "minItems": 1,
+                        "$ref": "#/$defs/__schema9"
+                      }
+                    },
+                    "required": [
+                      "state",
+                      "reason",
+                      "evidenceRefs"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "unit": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "state": {
+                        "type": "string",
+                        "const": "known"
+                      },
+                      "value": {
+                        "$ref": "#/$defs/__schema7"
+                      }
+                    },
+                    "required": [
+                      "state",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "$ref": "#/$defs/__schema16"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "state": {
+                        "type": "string",
+                        "const": "absent"
+                      },
+                      "reason": {
+                        "$ref": "#/$defs/__schema7"
+                      },
+                      "evidenceRefs": {
+                        "minItems": 1,
+                        "$ref": "#/$defs/__schema9"
+                      }
+                    },
+                    "required": [
+                      "state",
+                      "reason",
+                      "evidenceRefs"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "frequency": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "state": {
+                        "type": "string",
+                        "const": "known"
+                      },
+                      "value": {
+                        "$ref": "#/$defs/__schema7"
+                      }
+                    },
+                    "required": [
+                      "state",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "$ref": "#/$defs/__schema16"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "state": {
+                        "type": "string",
+                        "const": "absent"
+                      },
+                      "reason": {
+                        "$ref": "#/$defs/__schema7"
+                      },
+                      "evidenceRefs": {
+                        "minItems": 1,
+                        "$ref": "#/$defs/__schema9"
+                      }
+                    },
+                    "required": [
+                      "state",
+                      "reason",
+                      "evidenceRefs"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "basis": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "state": {
+                        "type": "string",
+                        "const": "known"
+                      },
+                      "value": {
+                        "type": "string",
+                        "enum": [
+                          "gross",
+                          "net",
+                          "not_applicable"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "state",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "$ref": "#/$defs/__schema16"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "state": {
+                        "type": "string",
+                        "const": "absent"
+                      },
+                      "reason": {
+                        "$ref": "#/$defs/__schema7"
+                      },
+                      "evidenceRefs": {
+                        "minItems": 1,
+                        "$ref": "#/$defs/__schema9"
+                      }
+                    },
+                    "required": [
+                      "state",
+                      "reason",
+                      "evidenceRefs"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "referencePeriod": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "state": {
+                        "type": "string",
+                        "const": "known"
+                      },
+                      "value": {
+                        "$ref": "#/$defs/__schema7"
+                      }
+                    },
+                    "required": [
+                      "state",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "$ref": "#/$defs/__schema16"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "state": {
+                        "type": "string",
+                        "const": "absent"
+                      },
+                      "reason": {
+                        "$ref": "#/$defs/__schema7"
+                      },
+                      "evidenceRefs": {
+                        "minItems": 1,
+                        "$ref": "#/$defs/__schema9"
+                      }
+                    },
+                    "required": [
+                      "state",
+                      "reason",
+                      "evidenceRefs"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "duration": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "state": {
+                        "type": "string",
+                        "const": "known"
+                      },
+                      "value": {
+                        "$ref": "#/$defs/__schema7"
+                      }
+                    },
+                    "required": [
+                      "state",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "$ref": "#/$defs/__schema16"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "state": {
+                        "type": "string",
+                        "const": "absent"
+                      },
+                      "reason": {
+                        "$ref": "#/$defs/__schema7"
+                      },
+                      "evidenceRefs": {
+                        "minItems": 1,
+                        "$ref": "#/$defs/__schema9"
+                      }
+                    },
+                    "required": [
+                      "state",
+                      "reason",
+                      "evidenceRefs"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              },
+              "quantityKind": {
+                "anyOf": [
+                  {
+                    "type": "object",
+                    "properties": {
+                      "state": {
+                        "type": "string",
+                        "const": "known"
+                      },
+                      "value": {
+                        "type": "string",
+                        "enum": [
+                          "stock",
+                          "flow",
+                          "total_budget",
+                          "increment",
+                          "rate",
+                          "percentage_points",
+                          "minimum",
+                          "ceiling",
+                          "other"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "state",
+                      "value"
+                    ],
+                    "additionalProperties": false
+                  },
+                  {
+                    "$ref": "#/$defs/__schema16"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "state": {
+                        "type": "string",
+                        "const": "absent"
+                      },
+                      "reason": {
+                        "$ref": "#/$defs/__schema7"
+                      },
+                      "evidenceRefs": {
+                        "minItems": 1,
+                        "$ref": "#/$defs/__schema9"
+                      }
+                    },
+                    "required": [
+                      "state",
+                      "reason",
+                      "evidenceRefs"
+                    ],
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "required": [
+              "name",
+              "value",
+              "unit",
+              "frequency",
+              "basis",
+              "referencePeriod",
+              "duration",
+              "quantityKind"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "relatedPropositionRefs": {
+          "$ref": "#/$defs/__schema9"
+        },
+        "editorialState": {
+          "$ref": "#/$defs/__schema10"
+        },
+        "privateNotes": {
+          "$ref": "#/$defs/__schema11"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "availability",
+        "change",
+        "authorRef",
+        "questionRefs",
+        "citationRefs",
+        "summary",
+        "nature",
+        "action",
+        "modality",
+        "attribution",
+        "statementDate",
+        "rubricVersion",
+        "population",
+        "territory",
+        "conditions",
+        "schedule",
+        "funding",
+        "parameters",
+        "relatedPropositionRefs",
+        "editorialState",
+        "privateNotes"
+      ],
+      "additionalProperties": false
+    },
+    "__schema21": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/__schema0"
+        },
+        "version": {
+          "$ref": "#/$defs/__schema2"
+        },
+        "availability": {
+          "$ref": "#/$defs/__schema3"
+        },
+        "change": {
+          "$ref": "#/$defs/__schema4"
+        },
+        "actorRef": {
+          "$ref": "#/$defs/__schema5"
+        },
+        "questionRef": {
+          "$ref": "#/$defs/__schema5"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "unexamined",
+            "in_progress",
+            "unreadable",
+            "examined_no_measure",
+            "measures_identified",
+            "attribution_unestablished"
+          ]
+        },
+        "sourceRefs": {
+          "$ref": "#/$defs/__schema9"
+        },
+        "asOf": {
+          "$ref": "#/$defs/__schema6"
+        },
+        "detail": {
+          "$ref": "#/$defs/__schema7"
+        },
+        "editorialState": {
+          "$ref": "#/$defs/__schema10"
+        },
+        "privateNotes": {
+          "$ref": "#/$defs/__schema11"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "availability",
+        "change",
+        "actorRef",
+        "questionRef",
+        "state",
+        "sourceRefs",
+        "asOf",
+        "detail",
+        "editorialState",
+        "privateNotes"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$id": "https://wmpons-mc.github.io/presidentielle-2027/schemas/private.schema.json"
+}

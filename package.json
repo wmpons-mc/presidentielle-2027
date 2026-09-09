@@ -1,0 +1,25 @@
+{
+  "name": "presidentielle-2027",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.11.1 <25"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.ts",
+    "typecheck": "tsc --noEmit",
+    "schemas": "node scripts/generate-schemas.ts",
+    "schemas:check": "node scripts/generate-schemas.ts --check",
+    "check": "npm run typecheck && npm test && npm run schemas:check",
+    "validate:content": "node scripts/validate-content.ts"
+  },
+  "dependencies": {
+    "zod": "4.6.0"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2",
+    "@types/node": "24.13.4"
+  }
+}
