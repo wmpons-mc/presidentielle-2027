@@ -9,7 +9,7 @@ export function sourceIndex(catalog:Catalog) {
   return [...versions.values()];
 }
 export function sitePages(catalog:Catalog): SitePage[] {
-  const titles = {actors:'Candidats',topics:'Thèmes',questions:'Questions',sources:'Sources'};
+  const titles = {actors:'Candidats',topics:'Thèmes',questions:'Questions',sources:'Sources',propositions:'Énoncés documentés'};
   const pages:SitePage[] = [{type:'method',path:'methode',title:'Méthode'}];
   for (const collection of Object.keys(routeCollections) as RouteCollection[]) {
     pages.push({type:'index',path:routeCollections[collection],title:titles[collection],collection});

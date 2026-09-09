@@ -1,6 +1,6 @@
 # Static site and extensible navigation
 
-POL-9 adds an Astro static shell consuming the POL-8 public contract. The interface is French; implementation and contributor documentation are English. Questions, Candidats, Méthode and Sources are working routes within the Propositions area. Comparison details and full method/correction reporting remain POL-10/POL-11.
+POL-9 adds an Astro static shell consuming the POL-8 public contract. The interface is French; implementation and contributor documentation are English. Questions, Candidats, Méthode and Sources are working routes within the Propositions area. POL-10 adds question comparison and source-backed proposition detail; full method/correction reporting remains POL-11.
 
 ## Local commands
 
@@ -16,7 +16,7 @@ Use Node from `.node-version` and run `npm ci --ignore-scripts`. Astro and its c
 - `npm exec -- playwright install chromium`: install the development-only browser once.
 - `npm run test:browser`: run desktop/mobile keyboard and overflow checks against `dist-demo/` via a loopback-only test server. Run `test:site` first.
 
-If Google Chrome is already installed locally, `PLAYWRIGHT_CHANNEL=chrome npm run test:browser` uses it instead; CI uses the Playwright-pinned Chromium. `tsc` checks all TypeScript including browser tooling, while `astro check --tsconfig tsconfig.astro.json` checks the site with Astro’s language service. Project Astro commands disable optional telemetry. There are no client frameworks, remote fonts, visitor scripts, AI calls or credentials in the site. Browser tooling is development-only. No command deploys the output. CI installs Chromium with its Linux dependencies and runs the same checks without publishing artifacts.
+If Google Chrome is already installed locally, `PLAYWRIGHT_CHANNEL=chrome npm run test:browser` uses it instead; CI uses the Playwright-pinned Chromium. `tsc` checks all TypeScript including browser tooling, while `astro check --tsconfig tsconfig.astro.json` checks the site with Astro’s language service. Project Astro commands disable optional telemetry. There are no client frameworks, remote fonts, visitor tracking, AI calls or credentials in the site. Browser tooling is development-only. No command deploys the output. CI installs Chromium with its Linux dependencies and runs the same checks without publishing artifacts.
 
 ## Public input boundary
 
@@ -46,8 +46,72 @@ Labels can change without changing stable IDs or URLs. Historical records do not
 
 `tests/helpers/site-fixtures.ts` reads the wholly fictional POL-8 JSON files and uses a synthetic approval only in test memory to exercise the existing exporter. `scripts/prepare-site-fixtures.ts` writes sanitized demo inputs under `.site-fixtures/`; the website reads only those public-shaped results in explicit `demo-base` or `demo-extended` mode. No private-schema fixture is bundled into the site module graph. Demo mode always writes `dist-demo/`, shows a persistent fictional-data warning and emits noindex/nofollow metadata. Neither the banner nor noindex is a confidentiality boundary; only fictional data may enter this mode. Never deploy `dist-demo/`.
 
-The integration test adds the second candidate and fourth theme/question by the existing extension JSON, validates both builds, checks all old paths, verifies index visibility and scans generated HTML for private sentinels. Production output contains no fictional records. Initial payload measurements include homepage HTML and its actual CSS, both raw and independently gzip-compressed. They exclude HTTP headers and are not a field performance claim. A 50 kB raw budget catches accidental asset inflation.
+The integration test adds a seventh personality and fourth theme/question by the existing extension JSON, validates both builds, checks all old paths, verifies index visibility and scans generated HTML for private sentinels. Production output contains no fictional records. Initial payload measurements include homepage HTML and its actual CSS, both raw and independently gzip-compressed. They exclude HTTP headers and are not a field performance claim. A 50 kB raw budget catches accidental asset inflation.
 
 Playwright checks the skip link, keyboard traversal to Questions, visible focus, current-page navigation, exact-version links, explicit empty coverage, 404 recovery, local-only requests and horizontal overflow at 375 px and 1280 px. These are observed automated browser checks, not human usability testing or a full accessibility audit.
 
-Observed local validation on 2026-09-09: 56 Node cases and 3 Chrome keyboard/mobile cases passed; Astro reported zero diagnostics. Base/extended/production builds produced 23/31/7 pages with all local links resolving. Initial production homepage: 2,799 bytes HTML + 5,685 bytes CSS = 8,484 bytes raw; 3,030 bytes combined gzip; zero browser JavaScript. Desktop and mobile screenshots were inspected locally.
+POL-9 baseline validation on 2026-09-09: 56 Node cases and 3 Chrome keyboard/mobile cases passed; Astro reported zero diagnostics. Base/extended/production builds produced 23/31/7 pages with all local links resolving. Initial production homepage: 2,799 bytes HTML + 5,685 bytes CSS = 8,484 bytes raw; 3,030 bytes combined gzip; zero browser JavaScript. Desktop and mobile screenshots were inspected locally.
+
+## Comparison (POL-10)
+
+`comparisonRows` renders every current person, sorted by French name and stable ID,
+including rows without a documented response or coverage. Direct or mandated
+personal measures/objectives are distinct from contextual statements. The latter
+retain their nature and attribution labels and never enter personal answer rows.
+Each row reports coverage for that exact question revision, with source corpus and
+date where supplied. Missing coverage does not assert that sources were examined.
+
+`PropositionSummary` displays nature, action, modality, attribution, beneficiaries,
+conditions, statement date and source type/date/vintage. Its detail link opens an
+exact proposition revision. `PropositionDetails`, `FactValue` and `Evidence` render
+unknown versus evidenced absence, quantity dimensions, funding/calendar, exact
+quote fragments with omission markers, actual speakers and original source links.
+No amount conversion, political score or conclusion about equivalence is computed.
+One canonical proposition can serve multiple questions without duplicating it.
+
+Theme/question options come from current collections. Candidate filters enhance
+static HTML with two small local scripts, without network calls or browser storage.
+For example `/questions/fiction.question.4/?candidate=fiction.actor.b` selects the
+fictional extension personality. Repeated `candidate` parameters select multiple
+people; no parameter means all, and `candidate=` means none. Unknown IDs produce
+an explicit notice and are not substituted. Back/forward navigation restores the
+selection. The share link points to the applied selection; switching questions
+retains it. Without JavaScript all rows remain readable with an explicit notice.
+Contextual statements remain separate and visible regardless of personal filters.
+
+`/propositions/<id>/versions/<version>/` is the stable evidence-detail address.
+Current question pages show current propositions only. Exact question-version
+pages show the supplied public revisions linked to that question, explicitly
+labelled as a reference view, not a reconstruction of a past publication date.
+History labels distinguish political changes from editorial corrections and do
+not imply that a related statement supersedes another.
+
+The data-only integration exercise removes the added actor, topic, question and
+proposition from the public `current` arrays and rebuilds: current navigation and
+comparison entries disappear while explicitly retained historical links resolve.
+This tests public scope removal, not a change to POL-8's withdrawal policy. Records
+marked inactive or withdrawn must still be excluded by the private exporter;
+this site never reconstructs or republishes them. Historical availability depends
+on what the approved export is permitted to retain.
+
+`tests/fixtures/comparison.json` adds entirely fictional similar/conditional,
+objective, uncertain-attribution, diagnosis and editorial-correction cases to the
+POL-8 fixtures. Base/extended builds contain six/seven personalities; a unit test
+also exercises twelve questions. This demonstrates data-driven extension, not an
+unlimited-volume guarantee. Built-link checks cover both levels and every source
+revision. Browser tests cover selection/reload/back, extension selection and proof
+navigation, no-JavaScript fallback, keyboard and 375/1280 px layouts.
+
+The production homepage remains empty of political content. The aggregate browser
+script budget is 15 kB raw; initial homepage HTML + CSS remains under 50 kB raw.
+The production build currently contains two bundled enhancements (2,153 bytes total);
+the homepage itself does not load them. Demo output remains local-only and must
+not be deployed. There is no human editorial approval or usability test implied.
+
+POL-10 local validation on 2026-09-09: 62 Node cases (also run with
+`node --test --test-isolation=none tests/*.test.ts` to obtain per-case evidence on
+this machine's N|Solid runtime), zero TypeScript/Astro diagnostics, seven Chrome
+browser cases passed. Builds produced 47/57/8 base/extended/production pages and
+all generated local links resolved. Initial homepage HTML + CSS: 9,428 raw bytes,
+3,276 combined gzip bytes. Desktop comparison and mobile proof screenshots were
+inspected. These are automated checks, not editorial or human usability approval.

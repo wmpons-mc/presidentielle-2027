@@ -1,0 +1,667 @@
+{
+  "actors": [
+    {
+      "id": "fiction.actor.c",
+      "version": 1,
+      "availability": "active",
+      "editorialState": "draft",
+      "privateNotes": "Fictional private note",
+      "change": {
+        "kind": "initial",
+        "previous": null,
+        "date": "2026-01-01",
+        "description": "Fictional initial record"
+      },
+      "kind": "person",
+      "name": "Fictional Person C",
+      "candidateStatuses": [
+        {
+          "status": "unknown",
+          "date": "2026-01-01",
+          "evidenceRefs": []
+        }
+      ]
+    },
+    {
+      "id": "fiction.actor.d",
+      "version": 1,
+      "availability": "active",
+      "editorialState": "draft",
+      "privateNotes": "Fictional private note",
+      "change": {
+        "kind": "initial",
+        "previous": null,
+        "date": "2026-01-01",
+        "description": "Fictional initial record"
+      },
+      "kind": "person",
+      "name": "Fictional Person D",
+      "candidateStatuses": [
+        {
+          "status": "unknown",
+          "date": "2026-01-01",
+          "evidenceRefs": []
+        }
+      ]
+    },
+    {
+      "id": "fiction.actor.e",
+      "version": 1,
+      "availability": "active",
+      "editorialState": "draft",
+      "privateNotes": "Fictional private note",
+      "change": {
+        "kind": "initial",
+        "previous": null,
+        "date": "2026-01-01",
+        "description": "Fictional initial record"
+      },
+      "kind": "person",
+      "name": "Fictional Person E",
+      "candidateStatuses": [
+        {
+          "status": "unknown",
+          "date": "2026-01-01",
+          "evidenceRefs": []
+        }
+      ]
+    },
+    {
+      "id": "fiction.actor.f",
+      "version": 1,
+      "availability": "active",
+      "editorialState": "draft",
+      "privateNotes": "Fictional private note",
+      "change": {
+        "kind": "initial",
+        "previous": null,
+        "date": "2026-01-01",
+        "description": "Fictional initial record"
+      },
+      "kind": "person",
+      "name": "Fictional Person F",
+      "candidateStatuses": [
+        {
+          "status": "unknown",
+          "date": "2026-01-01",
+          "evidenceRefs": []
+        }
+      ]
+    },
+    {
+      "id": "fiction.actor.g",
+      "version": 1,
+      "availability": "active",
+      "editorialState": "draft",
+      "privateNotes": "Fictional private note",
+      "change": {
+        "kind": "initial",
+        "previous": null,
+        "date": "2026-01-01",
+        "description": "Fictional initial record"
+      },
+      "kind": "person",
+      "name": "Fictional Person G",
+      "candidateStatuses": [
+        {
+          "status": "unknown",
+          "date": "2026-01-01",
+          "evidenceRefs": []
+        }
+      ]
+    }
+  ],
+  "topics": [],
+  "questions": [],
+  "sources": [
+    {
+      "id": "fiction.source.c",
+      "version": 1,
+      "availability": "active",
+      "editorialState": "draft",
+      "privateNotes": "Fictional private note",
+      "change": {
+        "kind": "initial",
+        "previous": null,
+        "date": "2026-01-01",
+        "description": "Fictional initial record"
+      },
+      "authorRef": {
+        "id": "fiction.actor.c",
+        "version": 1
+      },
+      "url": "https://example.org/fiction/c",
+      "title": "Fictional source C",
+      "support": "personal_announcement",
+      "publishedAt": {
+        "state": "known",
+        "value": "2026-01-01"
+      },
+      "accessedAt": "2026-01-02",
+      "electionYear": {
+        "state": "unknown"
+      },
+      "contentDigest": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "fullText": "PRIVATE FICTIONAL FULL SOURCE",
+      "rightsNotes": "Fictional rights review only"
+    }
+  ],
+  "citations": [
+    {
+      "id": "fiction.citation.c",
+      "version": 1,
+      "availability": "active",
+      "editorialState": "draft",
+      "privateNotes": "Fictional private note",
+      "change": {
+        "kind": "initial",
+        "previous": null,
+        "date": "2026-01-01",
+        "description": "Fictional initial record"
+      },
+      "sourceRef": {
+        "id": "fiction.source.c",
+        "version": 1
+      },
+      "speakerRef": {
+        "id": "fiction.actor.c",
+        "version": 1
+      },
+      "fragments": [
+        {
+          "text": "For fictional residents only, I would add 30 tokens monthly if the fictional assembly agrees.",
+          "locator": {
+            "kind": "section",
+            "value": "Fictional section 2"
+          },
+          "omissionBefore": false,
+          "omissionAfter": false
+        }
+      ]
+    },
+    {
+      "id": "fiction.citation.context",
+      "version": 1,
+      "availability": "active",
+      "editorialState": "draft",
+      "privateNotes": "Fictional private note",
+      "change": {
+        "kind": "initial",
+        "previous": null,
+        "date": "2026-01-01",
+        "description": "Fictional initial record"
+      },
+      "sourceRef": {
+        "id": "fiction.source.a",
+        "version": 1
+      },
+      "speakerRef": {
+        "id": "fiction.actor.a",
+        "version": 1
+      },
+      "fragments": [
+        {
+          "text": "A fictional discussion paper suggests a reserve of 30 tokens.",
+          "locator": {
+            "kind": "section",
+            "value": "Fictional section 2"
+          },
+          "omissionBefore": true,
+          "omissionAfter": false
+        }
+      ]
+    },
+    {
+      "id": "fiction.citation.objective",
+      "version": 1,
+      "availability": "active",
+      "editorialState": "draft",
+      "privateNotes": "Fictional private note",
+      "change": {
+        "kind": "initial",
+        "previous": null,
+        "date": "2026-01-01",
+        "description": "Fictional initial record"
+      },
+      "sourceRef": {
+        "id": "fiction.source.a",
+        "version": 1
+      },
+      "speakerRef": {
+        "id": "fiction.actor.a",
+        "version": 1
+      },
+      "fragments": [
+        {
+          "text": "My fictional objective is a more accessible token service.",
+          "locator": {
+            "kind": "section",
+            "value": "Fictional section 2"
+          },
+          "omissionBefore": true,
+          "omissionAfter": false
+        }
+      ]
+    },
+    {
+      "id": "fiction.citation.diagnosis",
+      "version": 1,
+      "availability": "active",
+      "editorialState": "draft",
+      "privateNotes": "Fictional private note",
+      "change": {
+        "kind": "initial",
+        "previous": null,
+        "date": "2026-01-01",
+        "description": "Fictional initial record"
+      },
+      "sourceRef": {
+        "id": "fiction.source.a",
+        "version": 1
+      },
+      "speakerRef": {
+        "id": "fiction.actor.a",
+        "version": 1
+      },
+      "fragments": [
+        {
+          "text": "The fictional token service is difficult to access.",
+          "locator": {
+            "kind": "section",
+            "value": "Fictional section 2"
+          },
+          "omissionBefore": true,
+          "omissionAfter": false
+        }
+      ]
+    }
+  ],
+  "propositions": [
+    {
+      "id": "fiction.proposition.c",
+      "version": 1,
+      "availability": "active",
+      "editorialState": "draft",
+      "privateNotes": "Fictional private note",
+      "change": {
+        "kind": "initial",
+        "previous": null,
+        "date": "2026-01-01",
+        "description": "Fictional initial record"
+      },
+      "authorRef": {
+        "id": "fiction.actor.c",
+        "version": 1
+      },
+      "questionRefs": [
+        {
+          "id": "fiction.question.1",
+          "version": 1
+        }
+      ],
+      "citationRefs": [
+        {
+          "id": "fiction.citation.c",
+          "version": 1
+        }
+      ],
+      "summary": "Fictional proposal: 30 monthly tokens for residents, subject to assembly approval.",
+      "nature": "measure",
+      "action": "propose",
+      "modality": "explicit_condition",
+      "attribution": {
+        "kind": "direct",
+        "attributedTo": {
+          "id": "fiction.actor.c",
+          "version": 1
+        },
+        "proofCitationRefs": []
+      },
+      "statementDate": {
+        "state": "known",
+        "value": "2026-01-01"
+      },
+      "rubricVersion": "0.1",
+      "population": {
+        "state": "known",
+        "value": "Fictional residents"
+      },
+      "territory": {
+        "state": "unknown"
+      },
+      "conditions": {
+        "state": "known",
+        "value": "Only if the fictional assembly agrees"
+      },
+      "schedule": {
+        "state": "unknown"
+      },
+      "funding": {
+        "state": "unknown"
+      },
+      "parameters": [
+        {
+          "name": "amount",
+          "value": {
+            "state": "known",
+            "value": "30"
+          },
+          "unit": {
+            "state": "known",
+            "value": "tokens"
+          },
+          "frequency": {
+            "state": "known",
+            "value": "monthly"
+          },
+          "quantityKind": {
+            "state": "known",
+            "value": "increment"
+          },
+          "basis": {
+            "state": "unknown"
+          },
+          "referencePeriod": {
+            "state": "unknown"
+          },
+          "duration": {
+            "state": "unknown"
+          }
+        }
+      ],
+      "relatedPropositionRefs": []
+    },
+    {
+      "id": "fiction.proposition.a",
+      "version": 2,
+      "availability": "active",
+      "editorialState": "draft",
+      "privateNotes": "Fictional private note",
+      "change": {
+        "kind": "editorial_correction",
+        "previous": {
+          "id": "fiction.proposition.a",
+          "version": 1
+        },
+        "date": "2026-01-03",
+        "description": "Fictional wording correction; no political change."
+      },
+      "authorRef": {
+        "id": "fiction.actor.a",
+        "version": 1
+      },
+      "questionRefs": [
+        {
+          "id": "fiction.question.1",
+          "version": 1
+        },
+        {
+          "id": "fiction.question.2",
+          "version": 1
+        }
+      ],
+      "citationRefs": [
+        {
+          "id": "fiction.citation.a",
+          "version": 1
+        }
+      ],
+      "summary": "Fictional conditional addition of 30 tokens per month.",
+      "nature": "measure",
+      "action": "propose",
+      "modality": "explicit_condition",
+      "attribution": {
+        "kind": "direct",
+        "attributedTo": {
+          "id": "fiction.actor.a",
+          "version": 1
+        },
+        "proofCitationRefs": []
+      },
+      "statementDate": {
+        "state": "known",
+        "value": "2026-01-01"
+      },
+      "rubricVersion": "0.1",
+      "population": {
+        "state": "unknown"
+      },
+      "territory": {
+        "state": "unknown"
+      },
+      "conditions": {
+        "state": "known",
+        "value": "Only if the fictional reserve permits"
+      },
+      "schedule": {
+        "state": "unknown"
+      },
+      "funding": {
+        "state": "unknown"
+      },
+      "parameters": [
+        {
+          "name": "amount",
+          "value": {
+            "state": "known",
+            "value": "30"
+          },
+          "unit": {
+            "state": "known",
+            "value": "tokens"
+          },
+          "frequency": {
+            "state": "known",
+            "value": "monthly"
+          },
+          "quantityKind": {
+            "state": "known",
+            "value": "increment"
+          },
+          "basis": {
+            "state": "unknown"
+          },
+          "referencePeriod": {
+            "state": "unknown"
+          },
+          "duration": {
+            "state": "unknown"
+          }
+        }
+      ],
+      "relatedPropositionRefs": [
+        {
+          "id": "fiction.proposition.a",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "id": "fiction.proposition.context",
+      "version": 1,
+      "availability": "active",
+      "editorialState": "draft",
+      "privateNotes": "Fictional private note",
+      "change": {
+        "kind": "initial",
+        "previous": null,
+        "date": "2026-01-01",
+        "description": "Fictional initial record"
+      },
+      "authorRef": {
+        "id": "fiction.actor.a",
+        "version": 1
+      },
+      "questionRefs": [
+        {
+          "id": "fiction.question.1",
+          "version": 1
+        }
+      ],
+      "citationRefs": [
+        {
+          "id": "fiction.citation.context",
+          "version": 1
+        }
+      ],
+      "summary": "A fictional discussion paper suggests a reserve of 30 tokens.",
+      "nature": "measure",
+      "action": "propose",
+      "modality": "under_study",
+      "attribution": {
+        "kind": "unestablished",
+        "attributedTo": null,
+        "proofCitationRefs": []
+      },
+      "statementDate": {
+        "state": "known",
+        "value": "2026-01-01"
+      },
+      "rubricVersion": "0.1",
+      "population": {
+        "state": "unknown"
+      },
+      "territory": {
+        "state": "unknown"
+      },
+      "conditions": {
+        "state": "unknown"
+      },
+      "schedule": {
+        "state": "unknown"
+      },
+      "funding": {
+        "state": "unknown"
+      },
+      "parameters": [],
+      "relatedPropositionRefs": []
+    },
+    {
+      "id": "fiction.proposition.objective",
+      "version": 1,
+      "availability": "active",
+      "editorialState": "draft",
+      "privateNotes": "Fictional private note",
+      "change": {
+        "kind": "initial",
+        "previous": null,
+        "date": "2026-01-01",
+        "description": "Fictional initial record"
+      },
+      "authorRef": {
+        "id": "fiction.actor.a",
+        "version": 1
+      },
+      "questionRefs": [
+        {
+          "id": "fiction.question.1",
+          "version": 1
+        }
+      ],
+      "citationRefs": [
+        {
+          "id": "fiction.citation.objective",
+          "version": 1
+        }
+      ],
+      "summary": "My fictional objective is a more accessible token service.",
+      "nature": "objective",
+      "action": "propose",
+      "modality": "under_study",
+      "attribution": {
+        "kind": "direct",
+        "attributedTo": {
+          "id": "fiction.actor.a",
+          "version": 1
+        },
+        "proofCitationRefs": []
+      },
+      "statementDate": {
+        "state": "known",
+        "value": "2026-01-01"
+      },
+      "rubricVersion": "0.1",
+      "population": {
+        "state": "unknown"
+      },
+      "territory": {
+        "state": "unknown"
+      },
+      "conditions": {
+        "state": "unknown"
+      },
+      "schedule": {
+        "state": "unknown"
+      },
+      "funding": {
+        "state": "unknown"
+      },
+      "parameters": [],
+      "relatedPropositionRefs": []
+    },
+    {
+      "id": "fiction.proposition.diagnosis",
+      "version": 1,
+      "availability": "active",
+      "editorialState": "draft",
+      "privateNotes": "Fictional private note",
+      "change": {
+        "kind": "initial",
+        "previous": null,
+        "date": "2026-01-01",
+        "description": "Fictional initial record"
+      },
+      "authorRef": {
+        "id": "fiction.actor.a",
+        "version": 1
+      },
+      "questionRefs": [
+        {
+          "id": "fiction.question.1",
+          "version": 1
+        }
+      ],
+      "citationRefs": [
+        {
+          "id": "fiction.citation.diagnosis",
+          "version": 1
+        }
+      ],
+      "summary": "The fictional token service is difficult to access.",
+      "nature": "diagnosis",
+      "action": "propose",
+      "modality": "under_study",
+      "attribution": {
+        "kind": "direct",
+        "attributedTo": {
+          "id": "fiction.actor.a",
+          "version": 1
+        },
+        "proofCitationRefs": []
+      },
+      "statementDate": {
+        "state": "known",
+        "value": "2026-01-01"
+      },
+      "rubricVersion": "0.1",
+      "population": {
+        "state": "unknown"
+      },
+      "territory": {
+        "state": "unknown"
+      },
+      "conditions": {
+        "state": "unknown"
+      },
+      "schedule": {
+        "state": "unknown"
+      },
+      "funding": {
+        "state": "unknown"
+      },
+      "parameters": [],
+      "relatedPropositionRefs": []
+    }
+  ],
+  "coverage": []
+}

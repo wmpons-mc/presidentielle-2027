@@ -1,0 +1,17 @@
+---
+import type { Ref } from '../content/schemas.ts';
+import { recordPath } from '../site/catalog.ts';
+import type { Catalog } from '../site/catalog.ts';
+import { supportLabels, locatorLabels } from '../site/proposition-labels.ts';
+interface Props {reference:Ref;catalog:Catalog;}
+const {reference,catalog}=Astro.props;
+const citation=catalog.resolve('citations',reference);
+const source=catalog.resolve('sources',citation.sourceRef);
+---
+<figure class="evidence">
+  <figcaption><strong>Citation exacte</strong> · Locuteur : <a href={recordPath('actors',citation.speakerRef,true)}>{catalog.resolve('actors',citation.speakerRef).name}</a> · Citation version {citation.version}</figcaption>
+  {citation.fragments.map(fragment=><><blockquote>{fragment.omissionBefore && <span aria-label="Passage omis avant cet extrait">[…]</span>}{fragment.text}{fragment.omissionAfter && <span aria-label="Passage omis après cet extrait">[…]</span>}</blockquote><p class="muted">{locatorLabels[fragment.locator.kind]} {fragment.locator.value}</p></>)}
+  <p>{supportLabels[source.support]} · Publication : {source.publishedAt.state==='known' ? source.publishedAt.value : 'Date inconnue'} · Millésime électoral : {source.electionYear.state==='known' ? source.electionYear.value : 'Non précisé'}</p>
+  <p>Auteur du document : {catalog.resolve('actors',source.authorRef).name} · Consulté le {source.accessedAt}</p>
+  <p><a href={recordPath('sources',source,true)}>{source.title} — source version {source.version}</a> · <a href={source.url} rel="noreferrer">Consulter le document original ↗</a></p>
+</figure>

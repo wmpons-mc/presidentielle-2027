@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process';
-import { readFileSync, readdirSync, existsSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import assert from 'node:assert/strict';
@@ -14,13 +14,13 @@ function build(mode:string) {
   for (const file of files) {
     const html = readFileSync(join(dir,file),'utf8');
     assert.match(html,/<html lang="fr"/);
-    assert.ok(!/<script\b/i.test(html),'Static pages must not ship browser scripts');
+    for(const [,src] of html.matchAll(/<script[^>]*src="([^"]+)"/g)) assert.ok(src.startsWith('/_astro/'),'Only bundled local enhancement scripts');
     assert.ok(!/PRIVATE|privateNotes|reviewerId|rightsNotes|fullText|reexaminePropositionRefs/.test(html),'No private fields or source text');
     assert.ok(!/role="tab"/.test(html),'No unavailable analysis tabs');
     if(mode !== 'production') assert.match(html,/Données entièrement fictives/);
     else assert.ok(!/fiction\.|Fictional|Données entièrement fictives/.test(html),'No production fixtures');
     for (const [,href] of html.matchAll(/href="(\/[^"#]*)(?:#[^"]*)?"/g)) {
-      const pathname=decodeURIComponent(href);
+      const pathname=decodeURIComponent(href.split('?')[0]);
       const target=join(dir,pathname.endsWith('/') ? pathname+'index.html' : pathname);
       assert.ok(existsSync(target),`Broken link ${href} in ${file}`);
     }
@@ -35,6 +35,24 @@ for(const file of ['candidats/fiction.actor.b/index.html','themes/fiction.topic.
 assert.match(readFileSync('dist-demo/candidats/index.html','utf8'),/fiction.actor.b/);
 assert.match(readFileSync('dist-demo/index.html','utf8'),/fiction.topic.4/);
 assert.match(readFileSync('dist-demo/questions/fiction.question.3/index.html','utf8'),/Aucune proposition documentée/);
+assert.match(readFileSync('dist-demo/questions/fiction.question.1/index.html','utf8'),/Contexte distinct/);
+assert.match(readFileSync('dist-demo/propositions/fiction.proposition.a/versions/2/index.html','utf8'),/Correction éditoriale/);
+assert.match(readFileSync('dist-demo/propositions/fiction.proposition.b/versions/1/index.html','utf8'),/https:\/\/example.org/);
+// A published historical revision may remain referenced after leaving current scope.
+// This is not permission to expose records marked inactive/withdrawn in the exporter.
+const fixturePath='.site-fixtures/demo-extended.json';
+const original=readFileSync(fixturePath,'utf8');
+const scoped=JSON.parse(original);
+for(const collection of ['actors','topics','questions','propositions']) scoped.current[collection]=scoped.current[collection].filter((r:{id:string})=>!['fiction.actor.b','fiction.topic.4','fiction.question.4','fiction.proposition.b'].includes(r.id));
+writeFileSync(fixturePath,JSON.stringify(scoped));
+const reduced=build('demo-extended');
+assert.ok(!reduced.files.includes('questions/fiction.question.4/index.html'));
+assert.ok(reduced.files.includes('questions/fiction.question.4/versions/1/index.html'));
+assert.ok(reduced.files.includes('propositions/fiction.proposition.b/versions/1/index.html'));
+assert.doesNotMatch(readFileSync('dist-demo/index.html','utf8'),/fiction.topic.4/);
+assert.doesNotMatch(readFileSync('dist-demo/questions/fiction.question.1/index.html','utf8'),/data-actor="fiction.actor.b"/);
+writeFileSync(fixturePath,original);
+build('demo-extended');
 const production = build('production');
 const html=readFileSync('dist/index.html');
 const cssPaths=[...html.toString().matchAll(/href="([^\"]+\.css)"/g)].map(m => join('dist',m[1]));
@@ -43,5 +61,8 @@ assert.ok(css.length>0,'Measure the actual stylesheet');
 const raw=html.length+css.reduce((s,b)=>s+b.length,0);
 const gzip=gzipSync(html).length+css.reduce((s,b)=>s+gzipSync(b).length,0);
 assert.ok(raw < 50_000,'Initial HTML + CSS budget: 50 kB raw');
-assert.ok(readdirSync('dist',{recursive:true}).every(p=>!String(p).endsWith('.js')),'No browser JS assets');
-console.log(JSON.stringify({basePages:base.files.length,extendedPages:extended.files.length,productionPages:production.files.length,initialHtmlBytes:html.length,initialCssBytes:css.reduce((s,b)=>s+b.length,0),initialTotalBytes:raw,initialGzipBytes:gzip,browserJavaScriptBytes:0},null,2));
+const js=readdirSync('dist',{recursive:true}).filter(p=>String(p).endsWith('.js')).map(p=>readFileSync(join('dist',String(p))));
+const jsBytes=js.reduce((sum,b)=>sum+b.length,0);
+assert.ok(jsBytes<15_000,'All browser enhancement scripts: under 15 kB raw');
+for(const script of js) assert.doesNotMatch(script.toString(),/PRIVATE|reviewerId|fullText|privateNotes/);
+console.log(JSON.stringify({basePages:base.files.length,extendedPages:extended.files.length,productionPages:production.files.length,initialHtmlBytes:html.length,initialCssBytes:css.reduce((s,b)=>s+b.length,0),initialTotalBytes:raw,initialGzipBytes:gzip,browserJavaScriptBytes:jsBytes},null,2));

@@ -53,9 +53,9 @@ export function createCatalog(input: unknown, allowFixtures = false) {
   return { data, current, resolve };
 }
 
-export const routeCollections = { actors:'candidats', topics:'themes', questions:'questions', sources:'sources' } as const;
+export const routeCollections = { actors:'candidats', topics:'themes', questions:'questions', sources:'sources', propositions:'propositions' } as const;
 export type RouteCollection = keyof typeof routeCollections;
 export function recordPath(collection: RouteCollection, record: Ref, historical = false): string {
   return `/${routeCollections[collection]}/${record.id}/${historical ? `versions/${record.version}/` : ''}`;
 }
-export const recordLabel = (record: {name?: string;label?: string;title?: string}) => record.name ?? record.label ?? record.title ?? '';
+export const recordLabel = (record: {name?: string;label?: string;title?: string;summary?:string}) => record.name ?? record.label ?? record.title ?? record.summary ?? '';

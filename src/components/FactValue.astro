@@ -1,0 +1,8 @@
+---
+import type { Proposition } from '../site/comparison.ts';
+import type { Catalog } from '../site/catalog.ts';
+import Evidence from './Evidence.astro';
+interface Props {value:Proposition['population'];catalog:Catalog;labels?:Record<string,string>;}
+const {value,catalog,labels}=Astro.props;
+---
+{value.state==='known' ? (labels?.[value.value] ?? value.value) : value.state==='unknown' ? <span class="muted">Non précisé dans les données documentées</span> : <><span>Absence explicitement documentée : {value.reason}</span>{value.evidenceRefs.map(ref=><Evidence reference={ref} catalog={catalog} />)}</>}

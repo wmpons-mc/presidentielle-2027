@@ -1,0 +1,34 @@
+---
+import type { Catalog } from '../site/catalog.ts';
+import { recordPath } from '../site/catalog.ts';
+interface Props {catalog:Catalog;questionId?:string;}
+const {catalog,questionId}=Astro.props;
+const questions=catalog.current.questions.filter(q=>catalog.current.topics.some(t=>t.id===q.topicRef.id));
+const selected=questions.find(q=>q.id===questionId);
+---
+<form data-question-picker hidden class="filters">
+  <label for="comparison-topic">Thème</label><select id="comparison-topic" name="topic"><option value="">Tous les thèmes</option>{catalog.current.topics.map(t=><option value={t.id} selected={selected?.topicRef.id===t.id}>{t.label}</option>)}</select>
+  <label for="comparison-question">Question</label><select id="comparison-question" name="question" required><option value="">Choisir une question</option>{questions.map(q=><option value={recordPath('questions',q)} data-topic={q.topicRef.id} selected={q.id===questionId}>{q.label}</option>)}</select>
+  <button type="submit">Afficher la question</button>
+</form>
+<script>
+  import { selectionQuery } from '../site/selection.ts';
+  for(const form of document.querySelectorAll<HTMLFormElement>('[data-question-picker]')) {
+    const topic=form.elements.namedItem('topic') as HTMLSelectElement;
+    const question=form.elements.namedItem('question') as HTMLSelectElement;
+    const options=Array.from(question.options).map(option=>option.cloneNode(true) as HTMLOptionElement);
+    function update() {
+      const previous=question.value;
+      question.replaceChildren(...options.filter(o=>!o.value || !topic.value || o.dataset.topic===topic.value).map(o=>o.cloneNode(true)));
+      question.value=Array.from(question.options).some(o=>o.value===previous) ? previous : '';
+    }
+    topic.addEventListener('change',update); update(); form.hidden=false;
+    form.addEventListener('submit',event=>{
+      event.preventDefault(); if(!question.value) return;
+      const target=new URL(question.value,location.origin);
+      const params=new URLSearchParams(location.search);
+      if(params.has('candidate')) target.search=selectionQuery(params.getAll('candidate').filter(Boolean));
+      location.assign(target.href);
+    });
+  }
+</script>

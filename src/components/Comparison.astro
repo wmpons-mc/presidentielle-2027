@@ -1,0 +1,62 @@
+---
+import type { Ref } from '../content/schemas.ts';
+import type { Catalog } from '../site/catalog.ts';
+import { recordPath } from '../site/catalog.ts';
+import { comparisonRows,contextualStatements } from '../site/comparison.ts';
+import { coverageLabels } from '../site/labels.ts';
+import PropositionSummary from './PropositionSummary.astro';
+import QuestionPicker from './QuestionPicker.astro';
+interface Props {catalog:Catalog;question:Ref;historical:boolean;}
+const {catalog,question,historical}=Astro.props;
+const rows=comparisonRows(catalog,question,historical);
+const context=contextualStatements(catalog,question,historical);
+---
+<QuestionPicker catalog={catalog} questionId={question.id} />
+<section data-comparison>
+  <h2>Comparer les réponses documentées</h2>
+  <p>Ordre alphabétique des noms, puis identifiant stable en cas d’égalité. Aucune note ni classement politique. Une information manquante ne signifie ni opposition ni absence de position.</p>
+  {historical && <p class="version-note">Vue des références publiques à cette version de la question, pouvant inclure plusieurs versions d’un énoncé. Ce n’est pas une reconstitution du périmètre à une date passée.</p>}
+  <form data-candidate-filter hidden class="filters">
+    <fieldset><legend>Personnalités à comparer</legend>{rows.map(({actor})=><label class="choice"><input type="checkbox" name="candidate" value={actor.id} checked /> {actor.name}</label>)}</fieldset>
+    <button type="submit">Appliquer la sélection</button>
+    <button type="button" data-select-all>Tout sélectionner</button>
+    <button type="button" data-select-none>Tout désélectionner</button>
+    <p data-selection-status role="status"></p>
+    <p data-unavailable hidden>Certaines personnalités du lien ne sont plus disponibles dans ce périmètre. Elles n’ont pas été remplacées automatiquement.</p>
+    <a data-share href={recordPath('questions',question,historical)}>Lien vers cette sélection</a>
+  </form>
+  <noscript><p>Toutes les personnalités sont affichées. Les filtres du lien nécessitent JavaScript ; les fiches et les preuves restent consultables.</p></noscript>
+  <p data-no-selection hidden>Aucune personnalité sélectionnée.</p>
+  <div class="comparison-grid">{rows.map(({actor,propositions,coverage})=><section class="comparison-row" data-actor={actor.id}>
+    <h2><a href={recordPath('actors',actor,true)}>{actor.name}</a></h2>
+    {propositions.length ? propositions.map(p=><PropositionSummary proposition={p} catalog={catalog} />) : <p>Aucune mesure ou objectif personnel attribué n’est documenté ici. Ce n’est pas une opposition.</p>}
+    <h3>Couverture pour cette question</h3>
+    {coverage.length ? coverage.map(c=><div><p><strong>{coverageLabels[c.state]}</strong> · {c.asOf}</p><p>{c.detail}</p>{c.sourceRefs.map(ref=><p><a href={recordPath('sources',ref,true)}>{catalog.resolve('sources',ref).title}</a></p>)}</div>) : <p>Couverture non renseignée pour cette personnalité et cette question ; corpus et date d’examen inconnus.</p>}
+  </section>)}</div>
+  {context.length>0 && <section><h2>Contexte distinct des réponses personnelles</h2><p>Les diagnostics, évaluations de tiers, positions d’organisation et attributions non établies ne sont pas présentés comme des mesures personnelles.</p>{context.map(p=><PropositionSummary proposition={p} catalog={catalog} />)}</section>}
+</section>
+<script>
+  import { readSelection,selectionQuery } from '../site/selection.ts';
+  for(const root of document.querySelectorAll<HTMLElement>('[data-comparison]')) {
+    const form=root.querySelector<HTMLFormElement>('[data-candidate-filter]')!;
+    const inputs=Array.from(form.querySelectorAll<HTMLInputElement>('input[name="candidate"]'));
+    const available=inputs.map(input=>input.value);
+    const rows=Array.from(root.querySelectorAll<HTMLElement>('[data-actor]'));
+    function render() {
+      const selection=readSelection(new URLSearchParams(location.search),available);
+      for(const input of inputs) input.checked=selection.ids.includes(input.value);
+      for(const row of rows) row.hidden=!selection.ids.includes(row.dataset.actor!);
+      root.querySelector<HTMLElement>('[data-no-selection]')!.hidden=selection.ids.length>0;
+      form.querySelector<HTMLElement>('[data-unavailable]')!.hidden=selection.unavailable.length===0;
+      form.querySelector('[data-selection-status]')!.textContent=`${selection.ids.length} personnalité(s) affichée(s).`;
+      form.querySelector<HTMLAnchorElement>('[data-share]')!.href=location.pathname+location.search;
+    }
+    function apply(ids:string[]) {
+      history.pushState(null,'',`${location.pathname}?${selectionQuery(ids)}`); render();
+    }
+    form.addEventListener('submit',event=>{event.preventDefault();apply(inputs.filter(input=>input.checked).map(input=>input.value));});
+    form.querySelector('[data-select-all]')!.addEventListener('click',()=>apply(available));
+    form.querySelector('[data-select-none]')!.addEventListener('click',()=>apply([]));
+    window.addEventListener('popstate',render); render(); form.hidden=false;
+  }
+</script>

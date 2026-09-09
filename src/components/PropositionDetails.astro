@@ -1,0 +1,33 @@
+---
+import type { Proposition } from '../site/comparison.ts';
+import { isPersonalAnswer } from '../site/comparison.ts';
+import type { Catalog } from '../site/catalog.ts';
+import { recordPath } from '../site/catalog.ts';
+import { natureLabels,actionLabels,modalityLabels,attributionLabels,changeLabels,quantityLabels } from '../site/proposition-labels.ts';
+import FactValue from './FactValue.astro';
+import Evidence from './Evidence.astro';
+interface Props {proposition:Proposition;catalog:Catalog;}
+const {proposition:p,catalog}=Astro.props;
+const facts=[['Bénéficiaires',p.population],['Territoire',p.territory],['Conditions',p.conditions],['Calendrier',p.schedule],['Financement',p.funding]] as const;
+const versions=catalog.data.content.propositions.filter(r=>r.id===p.id).sort((a,b)=>a.version-b.version);
+const parameterFields={value:'Valeur',unit:'Unité',frequency:'Fréquence',basis:'Base',referencePeriod:'Période de référence',duration:'Durée',quantityKind:'Nature de la quantité'} as const;
+---
+<section class="prose">
+  <p>{natureLabels[p.nature]} · {actionLabels[p.action]} · {modalityLabels[p.modality]}</p>
+  <p>{attributionLabels[p.attribution.kind]}{p.attribution.attributedTo && <> · Sujet de l’attribution documentée : <a href={recordPath('actors',p.attribution.attributedTo,true)}>{catalog.resolve('actors',p.attribution.attributedTo).name}</a></>}</p>
+  {!isPersonalAnswer(p) && <aside class="version-note">Élément de contexte : cet énoncé n’est pas présenté comme une mesure ou un objectif personnel attribué.</aside>}
+  <p>Date de l’énoncé : {p.statementDate.state==='known' ? p.statementDate.value : 'Non précisée'} · Grille : {p.rubricVersion}</p>
+  <h2>Modalités documentées</h2>
+  <dl class="metadata">{facts.map(([label,value])=><><dt>{label}</dt><dd><FactValue value={value} catalog={catalog} /></dd></>)}</dl>
+  <h2>Quantités et périmètre</h2>
+  <p>Une valeur inconnue ne signifie pas zéro. Vérifiez les populations, territoires, unités et périodes avant de rapprocher deux montants. Stock, flux, budget total et variation sont distincts ; aucun écart ni classement n’est calculé.</p>
+  {p.parameters.length ? p.parameters.map(parameter=><section><h3>{parameter.name}</h3><dl class="metadata">{Object.entries(parameterFields).map(([key,label])=><><dt>{label}</dt><dd><FactValue value={parameter[key as keyof typeof parameterFields]} catalog={catalog} labels={key==='basis' || key==='quantityKind' ? quantityLabels : undefined} /></dd></>)}</dl></section>) : <p>Aucune quantité documentée.</p>}
+  <h2>Extraits et sources</h2>
+  {p.citationRefs.map(reference=><Evidence reference={reference} catalog={catalog} />)}
+  {p.attribution.proofCitationRefs.length>0 && <section><h2>Preuves d’attribution</h2>{p.attribution.proofCitationRefs.map(reference=><Evidence reference={reference} catalog={catalog} />)}</section>}
+  <h2>Versions publiques disponibles</h2>
+  <p>Seules les versions présentes dans cet export public sont accessibles. Leur présence ne constitue pas un historique exhaustif ; une correction éditoriale n’est pas une évolution politique.</p>
+  <ul>{versions.map(v=><li><a href={recordPath('propositions',v,true)}>Version {v.version}</a> · {changeLabels[v.change.kind]} · {v.change.date}</li>)}</ul>
+  {p.relatedPropositionRefs.length>0 && <><h2>Énoncés liés</h2><p>Ce lien ne signifie pas qu’un énoncé remplace l’autre. Une divergence non résolue reste non résolue.</p><ul>{p.relatedPropositionRefs.map(ref=>{const related=catalog.resolve('propositions',ref);return <li><a href={recordPath('propositions',ref,true)}>{related.summary} — version {related.version}</a> · {changeLabels[related.change.kind]}</li>;})}</ul></>}
+  <h2>Questions associées</h2><ul>{p.questionRefs.map(ref=><li><a href={recordPath('questions',ref,true)}>{catalog.resolve('questions',ref).label}</a></li>)}</ul>
+</section>
