@@ -8,7 +8,7 @@
 - The owner uses GitHub Free. GitHub Pro is a deferred option to reconsider if the project succeeds, not an authorized purchase. Do not assume private branch protections are available; verify enforceable controls before enabling privileged automation.
 - Linear team: Political Analysis (`POL`). First milestone project ID: `f7c222d4-9eea-4779-863d-54cfeca0710e`.
 - Read [the workflow](docs/codex-workflow.md) before ticket work. Fetch the full ticket, comments, linked project documents, and native blocking relations; list results may truncate requirements.
-- The repository starts as documentation only. Astro/static TypeScript is planned in POL-9; no application install, build, lint, or test command exists yet. Add reproducible commands and CI with the implementation that introduces them.
+- The versioned content package uses Node 24 (see `.node-version`): `npm ci --ignore-scripts`, then `npm run check` for TypeScript, content tests and generated-schema freshness. See [the content contract](docs/content-model.md) and [agent guide](docs/content-agent-guide.md). Astro/static UI and its build commands remain POL-9. Never validate real private snapshots in public CI or copy them into this checkout.
 
 ## Autonomy
 
