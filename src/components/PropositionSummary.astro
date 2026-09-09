@@ -1,0 +1,20 @@
+---
+import type { Proposition } from '../site/comparison.ts';
+import type { Catalog } from '../site/catalog.ts';
+import { recordPath } from '../site/catalog.ts';
+import { natureLabels,actionLabels,modalityLabels,supportLabels,attributionLabels } from '../site/proposition-labels.ts';
+import FactValue from './FactValue.astro';
+interface Props {proposition:Proposition;catalog:Catalog;}
+const {proposition:p,catalog}=Astro.props;
+const sources=[...new Map(p.citationRefs.map(ref=>{const s=catalog.resolve('sources',catalog.resolve('citations',ref).sourceRef);return [`${s.id}@${s.version}`,s] as const;})).values()];
+---
+<article class="statement">
+  <p class="classification">{natureLabels[p.nature]} · {actionLabels[p.action]} · {modalityLabels[p.modality]}</p>
+  <p>{attributionLabels[p.attribution.kind]}{p.attribution.attributedTo && <> · Sujet de l’attribution documentée : {catalog.resolve('actors',p.attribution.attributedTo).name}</>}</p>
+  <h3>{p.summary}</h3>
+  <div><strong>Bénéficiaires :</strong> <FactValue value={p.population} catalog={catalog} /></div>
+  <div><strong>Conditions :</strong> <FactValue value={p.conditions} catalog={catalog} /></div>
+  <p>Date de l’énoncé : {p.statementDate.state==='known' ? p.statementDate.value : 'Non précisée'} · Version {p.version}</p>
+  {sources.map(s=><p class="muted">{supportLabels[s.support]} · {s.publishedAt.state==='known' ? s.publishedAt.value : 'Date inconnue'} · Millésime : {s.electionYear.state==='known' ? s.electionYear.value : 'Non précisé'}</p>)}
+  <a href={recordPath('propositions',p,true)}>Voir le détail et les preuves</a>
+</article>

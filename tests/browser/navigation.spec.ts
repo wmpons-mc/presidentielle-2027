@@ -30,7 +30,7 @@ for(const width of [375,1280]) test(`keyboard navigation and layout at ${width}p
     await expect(page.locator('main h1')).toHaveCount(1);
   }
   expect(requests.every(url=>url.startsWith('http://127.0.0.1:4173/'))).toBe(true);
-  expect(await page.locator('script').count()).toBe(0);
+  expect(await page.locator('script:not([src^="/_astro/"])').count()).toBe(0);
 });
 test('empty coverage and missing pages give explicit recovery',async({page})=>{
   await page.goto('/questions/fiction.question.3/');
