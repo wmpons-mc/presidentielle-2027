@@ -16,6 +16,14 @@
   "include": [
     "src/**/*.ts",
     "tests/**/*.ts",
-    "scripts/**/*.ts"
+    "scripts/**/*.ts",
+    "src/**/*.astro",
+    ".astro/types.d.ts",
+    "playwright.config.ts"
+  ],
+  "extends": "astro/tsconfigs/strict",
+  "exclude": [
+    "dist",
+    "dist-demo"
   ]
 }

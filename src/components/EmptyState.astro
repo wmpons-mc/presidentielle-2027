@@ -1,0 +1,5 @@
+---
+interface Props { title?:string; }
+const {title='Aucun contenu publié pour le moment'} = Astro.props;
+---
+<div class="empty-state"><span class="empty-mark" aria-hidden="true">—</span><div><h2>{title}</h2><p><slot>Les fiches apparaîtront après examen des sources et validation de leur publication.</slot></p></div></div>

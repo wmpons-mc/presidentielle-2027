@@ -5,7 +5,7 @@ Comparateur citoyen des propositions politiques pour la présidentielle françai
 
 Les consignes persistantes sont dans [AGENTS.md](AGENTS.md). Le [guide de travail](docs/codex-workflow.md) décrit les accès Linear/GitHub et le parcours ticket → branche → vérifications → commits → pull request.
 
-The repository contains the versioned content contract and project documentation. See the [content model](docs/content-model.md) and [agent extension guide](docs/content-agent-guide.md). With the Node version in `.node-version`, run `npm ci --ignore-scripts` and `npm run check`. The Astro site remains POL-9. Editorial drafts and corrections stay private; this repository contains only fictional test data and, later, approved public exports.
+The repository contains the versioned content contract and project documentation. See the [content model](docs/content-model.md) and [agent extension guide](docs/content-agent-guide.md). With the Node version in `.node-version`, run `npm ci --ignore-scripts` and `npm run check`. The Astro static site uses the POL-8 public contract. Run `npm run dev` locally or `npm run build` for production output. See [site commands and navigation](docs/static-site.md) for isolated fictional demos, browser tests and publication boundaries. Editorial drafts and corrections stay private; this repository contains only fictional test data and, later, approved public exports.
 
 ## Repository and service preparation
 

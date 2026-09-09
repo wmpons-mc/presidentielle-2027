@@ -53,7 +53,7 @@ Use the real task number, paths, title, and branch. Inspect CI once available an
 
 ## Validation and repository administration
 
-The POL-8 content package has a locked Node/TypeScript toolchain. Run `npm ci --ignore-scripts`, `npm run check` and `git diff --check`. The `Content contract` workflow runs the same checks using fictional fixtures only. See [the content model](content-model.md). POL-9 must add the static application build and corresponding CI; content tests do not test a website.
+The POL-8 content package has a locked Node/TypeScript toolchain. Run `npm ci --ignore-scripts`, `npm run check` and `git diff --check`. The `Content contract` workflow runs the same checks using fictional fixtures only. See [the content model](content-model.md). For the Astro site, also run `npm run test:site` and `npm run test:browser` after installing Chromium; see [site validation](static-site.md). CI builds production and isolated fictional demos, checks their links and exercises keyboard/mobile navigation.
 
 Once CI exists, configure repository rules to require PRs and the actual required checks, prevent force pushes to `main`, and choose a review policy supported by the repository plan. These are administrator settings, not enforced by `AGENTS.md`. Do not invent status-check names or silently change permissions. The POL-7 code license decision is recorded in `LICENSE` and the repository access document.
 
