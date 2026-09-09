@@ -1,0 +1,21 @@
+{
+  "schemaVersion": "1.0.0",
+  "datasetId": "public.initial",
+  "fixture": false,
+  "current": {
+    "actors": [],
+    "topics": [],
+    "questions": [],
+    "propositions": [],
+    "coverage": []
+  },
+  "content": {
+    "actors": [],
+    "topics": [],
+    "questions": [],
+    "sources": [],
+    "citations": [],
+    "propositions": [],
+    "coverage": []
+  }
+}

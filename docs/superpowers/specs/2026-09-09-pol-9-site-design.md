@@ -1,0 +1,15 @@
+# POL-9 static navigation design
+
+Build an Astro static site consuming only the POL-8 public contract. This is an architectural addition with routine decisions authorized by AGENTS.md. The requested ticket's sole blocker, POL-8, is Done; its stale Backlog label does not block this explicit assignment.
+
+Use server-rendered Astro components and plain CSS, with no client framework, external fonts, analytics or visitor JavaScript. A client router adds weight without helping this navigation; handwritten HTML would duplicate route generation. French interface, warm neutral background, dark ink, teal accents, generous spacing and visible keyboard focus. Only the Propositions product area is available. Questions, Candidats, Méthode and Sources are working links, not empty analysis tabs.
+
+The production input is `data/public.json`, initially an empty valid public snapshot. The build reads no private editorial input or approval store. Validate structural and referential integrity before rendering, reject fixtures in production and inactive records everywhere. Approval authenticity is still the protected POL-16/POL-17 pipeline's responsibility; a schema cannot establish human approval. Invalid input aborts the build without printing its content. Missing approved content yields explicit French empty states, and unknown routes have a 404 recovery page.
+
+A small catalog layer uses authoritative `current` references from POL-8 for indexes and resolves historical `content` by exact ID/version. Shared route helpers use immutable IDs, never labels. Static current routes and explicit `/versions/<version>/` routes preserve existing evidence links when labels change or newer revisions appear. Historical versions are clearly labeled and excluded from indexes. Removed records are not reconstructed from private history. POL-17 must retain permitted public historical records if old links must remain live; withdrawn content must not be republished.
+
+Generic dynamic pages cover candidates, questions, topics and sources. Topic navigation is generated from data; candidate and question pages show available coverage states and links, without implementing the POL-10 comparison interface or claiming the POL-11 full methodology is complete. Method page describes the basic evidence/unknown distinction honestly.
+
+Fictional demonstration snapshots are sanitized exports generated from the POL-8 test fixtures by a test-only script. Production uses `dist/`; explicit demo mode writes `dist-demo/`, has a persistent fictional-data banner and noindex metadata, and is never deployed. Tests rebuild base and extended demo datasets and compare routes and links. No private-schema fixture is imported into the website module graph.
+
+Verify Node tests for the public boundary/catalog, Astro/TypeScript checks, production and both demo builds, all local links, no private sentinels or scripts in production output, and initial HTML/CSS raw+gzip bytes. Playwright development-only tests exercise mobile/desktop keyboard navigation and overflow against local static output. No claim of human user testing or full accessibility certification.

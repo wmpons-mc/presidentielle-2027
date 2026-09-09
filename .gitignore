@@ -141,3 +141,10 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Local Astro outputs and fictional demo artifacts
+.astro/
+.site-fixtures/
+dist-demo/
+playwright-report/
+test-results/

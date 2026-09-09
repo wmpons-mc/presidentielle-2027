@@ -12,14 +12,24 @@
     "typecheck": "tsc --noEmit",
     "schemas": "node scripts/generate-schemas.ts",
     "schemas:check": "node scripts/generate-schemas.ts --check",
-    "check": "npm run typecheck && npm test && npm run schemas:check",
-    "validate:content": "node scripts/validate-content.ts"
+    "check": "npm run typecheck && npm run check:astro && npm test && npm run schemas:check",
+    "validate:content": "node scripts/validate-content.ts",
+    "dev": "node scripts/astro.ts dev --host 127.0.0.1",
+    "build": "node scripts/astro.ts build",
+    "preview": "node scripts/astro.ts preview --host 127.0.0.1",
+    "build:demo": "node scripts/build-demo.ts",
+    "check:astro": "node scripts/astro.ts check --tsconfig tsconfig.astro.json",
+    "test:site": "node scripts/test-site-build.ts",
+    "test:browser": "playwright test"
   },
   "dependencies": {
+    "astro": "7.3.2",
     "zod": "4.6.0"
   },
   "devDependencies": {
-    "typescript": "7.0.2",
-    "@types/node": "24.13.4"
+    "@astrojs/check": "0.9.10",
+    "@playwright/test": "1.63.0",
+    "@types/node": "24.13.4",
+    "typescript": "6.0.3"
   }
 }

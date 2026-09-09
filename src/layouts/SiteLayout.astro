@@ -1,0 +1,36 @@
+---
+import '../styles/site.css';
+import { loadCatalog } from '../site/load.ts';
+import { recordPath } from '../site/catalog.ts';
+interface Props { title:string; description?:string; }
+const {title,description='Comprendre les propositions, retrouver les sources et distinguer ce qui reste inconnu.'} = Astro.props;
+const catalog = loadCatalog();
+const links = [{href:'/questions/',label:'Questions'},{href:'/candidats/',label:'Candidats'},{href:'/methode/',label:'Méthode'},{href:'/sources/',label:'Sources'}];
+const path = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    {catalog.data.fixture && <meta name="robots" content="noindex, nofollow" />}
+    <title>{title} — Présidentielle 2027</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Aller au contenu</a>
+    {catalog.data.fixture && <aside class="demo-banner" aria-label="Démonstration">Démonstration locale · Données entièrement fictives · Ne pas publier</aside>}
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="/" aria-label="Présidentielle 2027 — Accueil"><span class="brand-mark" aria-hidden="true">27</span><span>Présidentielle <strong>2027</strong></span></a>
+        <nav aria-label="Navigation principale"><ul>{links.map(link => <li><a href={link.href} aria-current={path.startsWith(link.href) ? 'page' : undefined}>{link.label}</a></li>)}</ul></nav>
+      </div>
+    </header>
+    <div class="shell">
+      <div class="section-label"><span class="status-dot" aria-hidden="true"></span> Propositions <span class="section-note">Le point de départ</span></div>
+      {catalog.current.topics.length > 0 && <nav class="topics-nav" aria-label="Navigation par thème"><ul>{catalog.current.topics.map(topic => <li><a href={recordPath('topics',topic)} aria-current={path === recordPath('topics',topic) ? 'page' : undefined}>{topic.label}</a></li>)}</ul></nav>}
+      <main id="main" tabindex="-1"><slot /></main>
+    </div>
+    <footer class="site-footer"><div class="footer-inner"><p>Des propositions. Des sources. Des nuances.</p><a href="/methode/">Comprendre la démarche <span aria-hidden="true">↗</span></a><p class="small">Aucune absence de source ne vaut opposition.</p></div></footer>
+  </body>
+</html>

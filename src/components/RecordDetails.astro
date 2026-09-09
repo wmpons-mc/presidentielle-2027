@@ -1,0 +1,33 @@
+---
+import EmptyState from './EmptyState.astro';
+import { recordPath } from '../site/catalog.ts';
+import type { Catalog } from '../site/catalog.ts';
+import type { RecordPage } from '../site/pages.ts';
+import { relatedContent } from '../site/relations.ts';
+import { coverageLabels, candidacyLabels } from '../site/labels.ts';
+interface Props {page:RecordPage;catalog:Catalog;}
+const {page,catalog} = Astro.props;
+const {record,collection,historical} = page;
+const actor = collection === 'actors' ? catalog.resolve('actors',record) : undefined;
+const question = collection === 'questions' ? catalog.resolve('questions',record) : undefined;
+const source = collection === 'sources' ? catalog.resolve('sources',record) : undefined;
+const {questions,coverage,propositions} = relatedContent(catalog,collection,record,historical);
+const questionRefs = [...new Map(propositions.flatMap(p => p.questionRefs).map(r => [`${r.id}@${r.version}`,r])).values()];
+const currentVersion = collection === 'sources' ? undefined : catalog.current[collection].find(r => r.id === record.id);
+---
+<p class="muted">Version {record.version} · Mise à jour du {record.change.date}</p>
+{historical ? <aside class="version-note">Vous consultez une version précise conservée dans les données publiques.{currentVersion && <> <a href={recordPath(collection,currentVersion)}>Voir la fiche courante</a>.</>}</aside> : <p><a href={recordPath(collection,record,true)}>Lien permanent vers cette version</a></p>}
+{actor && <>
+  <h2>{actor.kind === 'organization' ? 'Organisation' : 'Statut de candidature'}</h2>
+  <ul>{actor.candidateStatuses.map(status => <li>{candidacyLabels[status.status]} · {status.date}{status.evidenceRefs.map(ref => {const citation=catalog.resolve('citations',ref);const source=catalog.resolve('sources',citation.sourceRef);return <> · <a href={recordPath('sources',source,true)}>Source du statut</a></>;})}</li>)}</ul>
+  <h2>Questions documentées</h2>
+  {questionRefs.length ? <ul class="record-list">{questionRefs.map(ref => {const q=catalog.resolve('questions',ref);return <li><a href={recordPath('questions',q,true)}>{q.label}</a></li>;})}</ul> : <EmptyState title="Aucune proposition documentée sur cette fiche">Cela ne signifie ni absence de position ni opposition. La couverture disponible est indiquée ci-dessous.</EmptyState>}
+</>}
+{question && <>
+  <p>Thème : <a href={recordPath('topics',question.topicRef,true)}>{catalog.resolve('topics',question.topicRef).label}</a></p>
+  <h2>Propositions documentées</h2>
+  {propositions.length ? <><p>{propositions.length} proposition(s) reliée(s) à cette version de la question. La comparaison détaillée sera ajoutée avant le lancement.</p><ul class="record-list">{[...new Map(propositions.map(p => [p.authorRef.id,p.authorRef])).values()].map(ref => <li><a href={recordPath('actors',ref,true)}>{catalog.resolve('actors',ref).name}</a></li>)}</ul></> : <EmptyState title="Aucune proposition documentée pour cette question">La fiche est disponible, mais aucune proposition n’est reliée à cette version dans les données publiées. Ce n’est pas une opposition.</EmptyState>}
+</>}
+{(actor || question) && <section aria-labelledby="coverage"><h2 id="coverage">Couverture disponible</h2>{coverage.length ? <ul class="record-list">{coverage.map(c => <li><strong>{coverageLabels[c.state]}</strong><p>{question ? catalog.resolve('actors',c.actorRef).name : catalog.resolve('questions',c.questionRef).label} · {c.asOf}</p><p>{c.detail}</p>{c.sourceRefs.map(ref => <p><a href={recordPath('sources',ref,true)}>{catalog.resolve('sources',ref).title}</a></p>)}</li>)}</ul> : <p class="muted">La couverture de cette fiche n’est pas encore renseignée. Aucune conclusion ne peut être tirée de cette absence d’information.</p>}</section>}
+{collection === 'topics' && <><h2>Les questions de ce thème</h2>{questions.length ? <ul class="record-list">{questions.map(q => <li><a href={recordPath('questions',q,historical)}>{q.label}</a></li>)}</ul> : <EmptyState title="Aucune question publiée pour ce thème" />}</>}
+{source && <section class="prose"><h2>Retrouver le document</h2><dl class="metadata"><dt>Auteur</dt><dd><a href={recordPath('actors',source.authorRef,true)}>{catalog.resolve('actors',source.authorRef).name}</a></dd><dt>Publication</dt><dd>{source.publishedAt.state === 'known' ? source.publishedAt.value : 'Date inconnue'}</dd><dt>Consultation</dt><dd>{source.accessedAt}</dd><dt>Document original</dt><dd><a href={source.url} rel="noreferrer">{source.title} ↗</a></dd></dl><p class="muted">Le texte intégral n’est pas hébergé sur cette page. Cette référence identifie la version consultée ; le document d’origine peut avoir évolué.</p></section>}
