@@ -1,6 +1,6 @@
 # Static site and extensible navigation
 
-POL-9 adds an Astro static shell consuming the POL-8 public contract. The interface is French; implementation and contributor documentation are English. Questions, Candidats, Méthode and Sources are working routes within the Propositions area. POL-10 adds question comparison and source-backed proposition detail. POL-11 adds the method/coverage/corrections interface; actual method copy remains private until owner review. See [publication metadata](publication-metadata.md).
+POL-9 adds an Astro static shell consuming the POL-8 public contract. The interface is French; implementation and contributor documentation are English. Questions, Candidats, Méthode and Sources are working routes within the Propositions area. POL-10 adds question comparison and source-backed proposition detail. POL-11 adds the method/coverage/corrections interface; the owner-approved method v0.2 is included in the public companion. See [publication metadata](publication-metadata.md).
 
 ## Local commands
 
@@ -20,7 +20,7 @@ If Google Chrome is already installed locally, `PLAYWRIGHT_CHANNEL=chrome npm ru
 
 ## Public input boundary
 
-`data/public.json` is the production proposition/source input; `data/publication.json` supplies reviewed method copy and publication metadata. They start empty/unavailable, with explicit empty-state pages; this is not a political publication. Real source text, drafts, review identities and approval records never belong in this checkout. Only the exact approved, sanitized output of the private publication pipeline may replace these files.
+`data/public.json` is the production proposition/source input; `data/publication.json` supplies reviewed method copy and publication metadata. The proposition/source dataset remains empty; the method companion contains approved text with unknown operational dates. This is not a political corpus publication. Real source text, drafts, review identities and approval records never belong in this checkout. Only the exact approved, sanitized output of the private publication pipeline may replace these files.
 
 `src/site/load.ts` loads at most 20 MB and reports a generic failure without JSON excerpts. `createCatalog` reuses `publicDatasetSchema`, rejects fixtures in production, unknown/private fields, duplicates, inactive records and broken public references, then resolves the authoritative `current` index. An invalid or missing input aborts the build; it is not silently treated as empty. The existing approved deployment should remain untouched when a future publication build fails.
 

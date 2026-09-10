@@ -22,8 +22,8 @@ pair. Dataset formatting changes require a new `datasetSha256` value.
 - Fixture flags must match the dataset and cannot enter production. Missing files,
   invalid fields, mismatched snapshots and broken correction references stop the
   build with a generic error, without echoing source text or parser excerpts.
-- Current production deliberately uses `unavailable`. The actual French draft
-  belongs in the private editorial repository for exact-version owner review.
+- The production companion contains the owner-approved French method v0.2.
+  Drafts and the exact-version approval record remain in the private repository.
   Public tests contain fictional copy only. Never point a public build at a draft.
 
 This is structural validation, not proof of approval. An `available` flag or a
@@ -75,7 +75,7 @@ removal integration test regenerates that binding and checks historical links.
 Browser cases exercise method → coverage → corrections → before/after proof at
 375/1280 px, including keyboard navigation and distinct collection/publication dates.
 
-Before launch, the owner must review the private French draft's exact version and
-confirm the public editorial identity and actual funding. Do not infer funding from
+The owner approved French method v0.2, the public pseudonym and personal funding.
+Future text changes require another exact-version review. Do not infer funding from
 account tiers or a budget ceiling. A code PR is reviewable independently; merging it
 does not approve, publish or deploy the private texts. No purchase is required.
