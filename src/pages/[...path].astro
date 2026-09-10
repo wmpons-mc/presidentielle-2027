@@ -3,6 +3,10 @@ import SiteLayout from '../layouts/SiteLayout.astro';
 import EmptyState from '../components/EmptyState.astro';
 import QuestionPicker from '../components/QuestionPicker.astro';
 import RecordDetails from '../components/RecordDetails.astro';
+import MethodPage from '../components/MethodPage.astro';
+import CoveragePage from '../components/CoveragePage.astro';
+import CorrectionsPage from '../components/CorrectionsPage.astro';
+import { loadPublication } from '../site/publication.ts';
 import { loadCatalog } from '../site/load.ts';
 import { recordLabel, recordPath } from '../site/catalog.ts';
 import { sitePages, sourceIndex } from '../site/pages.ts';
@@ -21,5 +25,7 @@ const indexRecords = page.type === 'index' ? (page.collection === 'sources' ? so
     {indexRecords.length ? <ul class="record-list">{indexRecords.map(record => <li><a href={recordPath(page.collection,record)}>{recordLabel(record)} <span aria-hidden="true">→</span></a>{page.collection === 'sources' && <p>Version {record.version} consultée</p>}</li>)}</ul> : <EmptyState />}
   </>}
   {page.type === 'record' && <RecordDetails page={page} catalog={catalog} />}
-  {page.type === 'method' && <article class="prose"><p class="lede">Comprendre ce qui est documenté, et ce qui ne l’est pas encore.</p><h2>Partir d’une question précise</h2><p>Les propositions sont rattachées à des questions et à des sources identifiables. Un objectif général, un diagnostic et une mesure concrète ne se confondent pas.</p><h2>Garder les nuances</h2><p>Une information inconnue n’est ni un zéro ni une opposition. Une mesure non trouvée dans les documents examinés ne signifie pas qu’elle n’existe dans aucun autre document.</p><h2>Retrouver la bonne version</h2><p>Les fiches et les sources possèdent des liens vers des versions précises. Le statut de candidature d’une personne est daté et distinct de la disponibilité de sa fiche.</p><h2>Un périmètre encore en préparation</h2><p>La comparaison suit l’ordre alphabétique des noms, puis les identifiants stables en cas d’égalité. Les filtres utilisent le périmètre actif et sont conservés dans le lien partagé. Les mesures et objectifs personnellement attribués sont séparés des éléments de contexte. Les versions publiques disponibles distinguent les corrections éditoriales des évolutions politiques ; aucun historique exhaustif n’est revendiqué.</p><a class="text-link" href="/sources/">Parcourir les sources disponibles →</a></article>}
+  {page.type === 'method' && <MethodPage publication={loadPublication()} />}
+  {page.type === 'coverage' && <CoveragePage catalog={catalog} />}
+  {page.type === 'corrections' && <CorrectionsPage publication={loadPublication()} />}
 </SiteLayout>

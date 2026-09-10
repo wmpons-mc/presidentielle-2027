@@ -1,0 +1,9 @@
+---
+import type { PublicDataset } from '../content/schemas.ts';
+import type { Catalog } from '../site/catalog.ts';
+import { recordPath } from '../site/catalog.ts';
+import { coverageLabels } from '../site/labels.ts';
+interface Props {coverage:PublicDataset['content']['coverage'];catalog:Catalog;}
+const {coverage,catalog}=Astro.props;
+---
+{coverage.length ? coverage.map(c=><div><p><strong>{coverageLabels[c.state]}</strong> · <time datetime={c.asOf}>{c.asOf}</time></p><p>{c.detail}</p>{c.sourceRefs.map(ref=><p><a href={recordPath('sources',ref,true)}>{catalog.resolve('sources',ref).title} — version {ref.version}</a></p>)}</div>) : <p>Couverture non renseignée pour cette personnalité et cette question ; corpus et date d’examen inconnus.</p>}

@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import assert from 'node:assert/strict';
 import './prepare-site-fixtures.ts';
+import { publicationFixture } from '../tests/helpers/publication-fixtures.ts';
 
 function build(mode:string) {
   const result = spawnSync(process.execPath,['node_modules/astro/bin/astro.mjs','build'],{encoding:'utf8',env:{...process.env,SITE_MODE:mode,ASTRO_TELEMETRY_DISABLED:'1'}});
@@ -38,13 +39,20 @@ assert.match(readFileSync('dist-demo/questions/fiction.question.3/index.html','u
 assert.match(readFileSync('dist-demo/questions/fiction.question.1/index.html','utf8'),/Contexte distinct/);
 assert.match(readFileSync('dist-demo/propositions/fiction.proposition.a/versions/2/index.html','utf8'),/Correction éditoriale/);
 assert.match(readFileSync('dist-demo/propositions/fiction.proposition.b/versions/1/index.html','utf8'),/https:\/\/example.org/);
+assert.match(readFileSync('dist-demo/methode/index.html','utf8'),/Fictional definitions/);
+assert.match(readFileSync('dist-demo/couverture/index.html','utf8'),/fiction.question.4/);
+assert.match(readFileSync('dist-demo/couverture/index.html','utf8'),/data-coverage-actor="fiction.actor.b"/);
+assert.match(readFileSync('dist-demo/corrections/index.html','utf8'),/Avant — version 1/);
 // A published historical revision may remain referenced after leaving current scope.
 // This is not permission to expose records marked inactive/withdrawn in the exporter.
 const fixturePath='.site-fixtures/demo-extended.json';
 const original=readFileSync(fixturePath,'utf8');
+const publicationPath='.site-fixtures/demo-extended-publication.json';
+const originalPublication=readFileSync(publicationPath,'utf8');
 const scoped=JSON.parse(original);
 for(const collection of ['actors','topics','questions','propositions']) scoped.current[collection]=scoped.current[collection].filter((r:{id:string})=>!['fiction.actor.b','fiction.topic.4','fiction.question.4','fiction.proposition.b'].includes(r.id));
 writeFileSync(fixturePath,JSON.stringify(scoped));
+writeFileSync(publicationPath,JSON.stringify(publicationFixture(JSON.stringify(scoped))));
 const reduced=build('demo-extended');
 assert.ok(!reduced.files.includes('questions/fiction.question.4/index.html'));
 assert.ok(reduced.files.includes('questions/fiction.question.4/versions/1/index.html'));
@@ -52,8 +60,12 @@ assert.ok(reduced.files.includes('propositions/fiction.proposition.b/versions/1/
 assert.doesNotMatch(readFileSync('dist-demo/index.html','utf8'),/fiction.topic.4/);
 assert.doesNotMatch(readFileSync('dist-demo/questions/fiction.question.1/index.html','utf8'),/data-actor="fiction.actor.b"/);
 writeFileSync(fixturePath,original);
+writeFileSync(publicationPath,originalPublication);
 build('demo-extended');
 const production = build('production');
+assert.match(readFileSync('dist/methode/index.html','utf8'),/pol-11.fr.v0.2/);
+assert.match(readFileSync('dist/methode/index.html','utf8'),/Atelier civique/);
+assert.match(readFileSync('dist/index.html','utf8'),/Non renseignée/);
 const html=readFileSync('dist/index.html');
 const cssPaths=[...html.toString().matchAll(/href="([^\"]+\.css)"/g)].map(m => join('dist',m[1]));
 const css=cssPaths.map(p => readFileSync(p));

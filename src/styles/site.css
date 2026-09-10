@@ -433,3 +433,7 @@ h1,h2,h3,a,p {
 .classification { font-weight: 600; }
 .evidence { margin: 1rem 0; padding: 1rem; background: #f3f6f4; overflow-wrap: anywhere; }
 .evidence blockquote { margin: 1rem 0; padding-left: 1rem; border-left: 3px solid #466957; }
+
+.publication-dates { flex-basis: 100%; font-size: .875rem; overflow-wrap: anywhere; }
+.coverage-section { margin-block: 2rem; scroll-margin-top: 1rem; }
+.coverage-section > section { border-bottom: 1px solid #bbc9c0; padding-block: .75rem; }

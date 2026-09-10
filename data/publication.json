@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "1.0.0",
+  "state": "available",
+  "fixture": false,
+  "datasetSha256": "139399f8f37829544a9d1b2e69e0d281db4787192a461b67e9f90e6901503d37",
+  "method": {
+    "version": "pol-11.fr.v0.2",
+    "definitions": {
+      "title": "Ce que nous comparons",
+      "paragraphs": [
+        "Le site permet de partir d’une question pour retrouver des propositions documentées, leurs conditions et leurs sources. Il ne note pas les personnalités et ne recommande pas de vote. La présence d’une personne dans le comparateur ne signifie pas qu’elle figure sur la liste officielle des candidats : son statut est indiqué séparément, avec sa date et ses preuves lorsqu’elles sont disponibles.",
+        "Une mesure décrit une action identifiable. Un objectif décrit un résultat souhaité sans préciser nécessairement l’action qui permettrait de l’atteindre. Un diagnostic décrit une situation ; il n’est pas présenté comme une mesure. Nous distinguons aussi l’engagement, la condition explicite, la piste à l’étude et l’hypothèse illustrative. Un refus n’est indiqué que s’il est explicitement documenté.",
+        "La nature d’un énoncé, son support et sa date sont des informations distinctes. Une annonce personnelle peut contenir une mesure conditionnelle. Un programme de parti n’est pas automatiquement celui d’une personne ; une déclaration de porte-parole ne lui est attribuée que si le mandat est documenté. Le détail conserve le locuteur réel. Les attributions non établies et les positions d’organisation sont présentées séparément comme contexte.",
+        "Les résumés conservent l’action, les bénéficiaires et les conditions essentielles. Le détail donne les montants, unités, périodes, calendrier et financement annoncé lorsqu’ils sont documentés. Une information inconnue reste inconnue. Les citations reproduisent les passages retenus, avec un repère et une source versionnée ; les coupures sont signalées et les passages éloignés restent séparés."
+      ]
+    },
+    "sources": {
+      "title": "Comment les sources et les questions sont sélectionnées",
+      "paragraphs": [
+        "Le périmètre repose sur des questions définies et versionnées. Pour chacune, les règles précisent ce qui entre dans la comparaison et ce qui en est exclu. Les thèmes servent à naviguer ; ils ne constituent pas un classement idéologique. Le nombre de personnes, de thèmes ou de questions du lancement ne constitue pas une limite du comparateur.",
+        "Nous privilégions les documents identifiables permettant de vérifier une attribution : programmes de campagne, programmes de parti, annonces personnelles et déclarations de porte-parole. Les documents de réflexion et les positions historiques conservent leur nature et leur millésime. Leur présence ne prouve pas leur adoption dans une campagne actuelle.",
+        "Chaque source est examinée dans son contexte utile, avec son auteur, sa date lorsqu’elle est établie et ses conditions de conservation et de citation. Un mot-clé isolé ne suffit pas à conclure. Le site renvoie au document original et aux extraits retenus ; il ne propose pas une reproduction intégrale des sources.",
+        "Une même mesure reprise sur plusieurs supports conserve une fiche et plusieurs preuves. Une mesure peut être reliée à plusieurs questions. La répétition ne lui donne pas un poids supplémentaire ; des conditions ou des montants différents ne sont pas fusionnés automatiquement.",
+        "La grille s’inspire de pratiques d’analyse de contenu du Manifesto Project et du Comparative Agendas Project : expliciter les unités, les définitions et les frontières de classement. Elle ne reproduit pas leurs classifications ou leurs indicateurs. Ces références ne constituent ni une certification de ce site ni une validation des résumés produits.",
+        "Le comparateur Présidentielles 2027 de la Fondation iFRAP peut servir de source secondaire pour repérer des propositions et orienter la recherche. Avant d’attribuer une mesure à une personne, nous vérifions le document ou la déclaration d’origine, sa date et son contexte. Les reformulations, analyses et éventuels chiffrages de la Fondation restent attribués à celle-ci ; ils ne deviennent pas des déclarations des candidats. Une information absente de ce comparateur ne permet pas de conclure à une absence de position."
+      ]
+    },
+    "limits": {
+      "title": "Ce que les données ne permettent pas de conclure",
+      "paragraphs": [
+        "La couverture dépend des documents repérés, accessibles et effectivement examinés. Elle n’est pas exhaustive. Une fiche sans mesure documentée ne signifie ni absence de position ni opposition. « Aucune mesure identifiée » ne vaut que pour les sources examinées et la date indiquée, pas pour tous les propos d’une personne.",
+        "Le registre présente la couverture pour chaque couple question-personnalité du périmètre actif. Il distingue les sources non examinées, l’examen en cours, une source non exploitable, l’absence de mesure dans un corpus examiné, les propositions repérées et une attribution non établie. Sans enregistrement, la couverture est dite non renseignée. Aucun pourcentage de complétude ne sert à évaluer une personne.",
+        "Les personnalités sont affichées par ordre alphabétique, avec un identifiant stable pour départager les noms identiques. Le lecteur peut sélectionner les personnes affichées. Le nombre de propositions ne détermine pas leur place.",
+        "Le comparateur ne déduit ni efficacité, ni sincérité, ni faisabilité budgétaire des annonces. Avant de rapprocher deux chiffres, il faut vérifier l’objet, les bénéficiaires, le territoire, l’unité et la période. Stock et flux, budget total et variation, taux et points de pourcentage restent distincts. Aucun écart ni conversion automatique n’est calculé.",
+        "Les versions publiques disponibles permettent de retrouver les références conservées, sans garantir un historique complet. La disparition d’une page ne démontre pas un abandon. Une nouvelle date ne résout pas à elle seule une contradiction. Une correction de notre résumé est distinguée d’une évolution politique ; les divergences non résolues restent présentées comme telles."
+      ]
+    },
+    "workflow": {
+      "title": "Ce qui relève de l’automatisation et de la relecture humaine",
+      "paragraphs": [
+        "Le site actuel construit automatiquement les pages, les liens et les filtres à partir de données structurées publiques. Les contrôles techniques vérifient notamment les champs attendus et les références de version. Ils ne prouvent pas, à eux seuls, qu’un résumé est fidèle ni qu’une source couvre entièrement une question.",
+        "Le fonctionnement prévu sépare la collecte, la préparation des résumés en espace privé, les vérifications, la relecture humaine et la publication. La collecte planifiée, l’assistance par API et le circuit protégé de publication sont encore en préparation ; cette page ne les présente pas comme déjà opérationnels.",
+        "Avant publication d’un contenu politique, le propriétaire doit relire la version exacte et ses citations. Une modification du résumé, de l’attribution, d’une condition ou de la source impose une nouvelle approbation. Les brouillons et signalements restent privés ; un agent ne s’approuve pas lui-même. La validation de la grille générale ne remplace pas la relecture des fiches.",
+        "La dernière collecte réussie indique une opération achevée sur le périmètre précisé ; elle ne signifie pas que toutes les sources possibles ont été trouvées. La dernière publication indique la mise à disposition d’une version publique. Ces dates sont distinctes de la date d’un propos, de publication du document original, de sa consultation et de l’examen éditorial. Une date non établie est indiquée comme non renseignée.",
+        "Le journal n’affiche que les notices de correction autorisées à être rendues publiques, avec leur date de publication et les versions concernées. Il ne reprend ni les échanges de relecture ni les signalements privés. Un journal vide signifie qu’aucune notice n’y est renseignée, pas que les données sont exemptes d’erreurs."
+      ]
+    },
+    "references": [
+      {
+        "title": "Manifesto Project — manuel de codage, édition révisée de 2021",
+        "url": "https://manifesto-project.wzb.eu/down/papers/handbook_2021_version_5.pdf"
+      },
+      {
+        "title": "Comparative Agendas Project — Master Codebook",
+        "url": "https://www.comparativeagendas.net/pages/master-codebook"
+      },
+      {
+        "title": "Fondation iFRAP — Comparateur de programmes Présidentielles 2027 (source secondaire de repérage)",
+        "url": "https://www.ifrap.org/comparateurs/presidentielles-2027"
+      }
+    ]
+  },
+  "responsibility": {
+    "title": "Responsabilité éditoriale",
+    "paragraphs": [
+      "Responsabilité éditoriale : Atelier civique. Les contenus et leurs corrections sont relus et validés par la personne responsable du projet avant publication."
+    ]
+  },
+  "funding": {
+    "title": "Financement du projet",
+    "paragraphs": [
+      "Le projet est financé sur les fonds personnels de son responsable."
+    ]
+  },
+  "lastSuccessfulCollection": {
+    "state": "unknown"
+  },
+  "collectionScope": "Aucune collecte réussie renseignée.",
+  "lastPublication": {
+    "state": "unknown"
+  },
+  "corrections": []
+}

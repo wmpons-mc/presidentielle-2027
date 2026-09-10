@@ -1,10 +1,13 @@
 ---
 import '../styles/site.css';
 import { loadCatalog } from '../site/load.ts';
+import { loadPublication } from '../site/publication.ts';
+import PublicationDates from '../components/PublicationDates.astro';
 import { recordPath } from '../site/catalog.ts';
 interface Props { title:string; description?:string; }
 const {title,description='Comprendre les propositions, retrouver les sources et distinguer ce qui reste inconnu.'} = Astro.props;
 const catalog = loadCatalog();
+const publication = loadPublication();
 const links = [{href:'/questions/',label:'Questions'},{href:'/candidats/',label:'Candidats'},{href:'/methode/',label:'Méthode'},{href:'/sources/',label:'Sources'}];
 const path = Astro.url.pathname;
 ---
@@ -31,6 +34,6 @@ const path = Astro.url.pathname;
       {catalog.current.topics.length > 0 && <nav class="topics-nav" aria-label="Navigation par thème"><ul>{catalog.current.topics.map(topic => <li><a href={recordPath('topics',topic)} aria-current={path === recordPath('topics',topic) ? 'page' : undefined}>{topic.label}</a></li>)}</ul></nav>}
       <main id="main" tabindex="-1"><slot /></main>
     </div>
-    <footer class="site-footer"><div class="footer-inner"><p>Des propositions. Des sources. Des nuances.</p><a href="/methode/">Comprendre la démarche <span aria-hidden="true">↗</span></a><p class="small">Aucune absence de source ne vaut opposition.</p></div></footer>
+    <footer class="site-footer"><div class="footer-inner"><p>Des propositions. Des sources. Des nuances.</p><a href="/methode/">Comprendre la démarche <span aria-hidden="true">↗</span></a><a href="/couverture/">Couverture</a><a href="/corrections/">Corrections publiées</a><p class="small">Aucune absence de source ne vaut opposition.</p><PublicationDates publication={publication} /></div></footer>
   </body>
 </html>

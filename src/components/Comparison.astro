@@ -3,7 +3,7 @@ import type { Ref } from '../content/schemas.ts';
 import type { Catalog } from '../site/catalog.ts';
 import { recordPath } from '../site/catalog.ts';
 import { comparisonRows,contextualStatements } from '../site/comparison.ts';
-import { coverageLabels } from '../site/labels.ts';
+import CoverageDetails from './CoverageDetails.astro';
 import PropositionSummary from './PropositionSummary.astro';
 import QuestionPicker from './QuestionPicker.astro';
 interface Props {catalog:Catalog;question:Ref;historical:boolean;}
@@ -31,7 +31,7 @@ const context=contextualStatements(catalog,question,historical);
     <h2><a href={recordPath('actors',actor,true)}>{actor.name}</a></h2>
     {propositions.length ? propositions.map(p=><PropositionSummary proposition={p} catalog={catalog} />) : <p>Aucune mesure ou objectif personnel attribué n’est documenté ici. Ce n’est pas une opposition.</p>}
     <h3>Couverture pour cette question</h3>
-    {coverage.length ? coverage.map(c=><div><p><strong>{coverageLabels[c.state]}</strong> · {c.asOf}</p><p>{c.detail}</p>{c.sourceRefs.map(ref=><p><a href={recordPath('sources',ref,true)}>{catalog.resolve('sources',ref).title}</a></p>)}</div>) : <p>Couverture non renseignée pour cette personnalité et cette question ; corpus et date d’examen inconnus.</p>}
+    <CoverageDetails coverage={coverage} catalog={catalog} />
   </section>)}</div>
   {context.length>0 && <section><h2>Contexte distinct des réponses personnelles</h2><p>Les diagnostics, évaluations de tiers, positions d’organisation et attributions non établies ne sont pas présentés comme des mesures personnelles.</p>{context.map(p=><PropositionSummary proposition={p} catalog={catalog} />)}</section>}
 </section>
