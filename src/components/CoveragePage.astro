@@ -1,0 +1,16 @@
+---
+import type { Catalog } from '../site/catalog.ts';
+import { recordPath } from '../site/catalog.ts';
+import { comparisonRows } from '../site/comparison.ts';
+import CoverageDetails from './CoverageDetails.astro';
+interface Props {catalog:Catalog;}
+const {catalog}=Astro.props;
+---
+<p><a href="/methode/">Lire la méthode</a> · <a href="/corrections/">Corrections publiées</a></p>
+{catalog.current.questions.length ? <>
+  <nav aria-label="Questions du registre"><ul class="record-list">{catalog.current.questions.map(question=><li><a href={`#${question.id}`}>{question.label}</a></li>)}</ul></nav>
+  {catalog.current.questions.map(question=><section id={question.id} class="coverage-section"><h2><a href={recordPath('questions',question)}>{question.label}</a></h2>
+    {comparisonRows(catalog,question).map(({actor,coverage})=><section data-coverage-actor={actor.id}><h3><a href={recordPath('actors',actor,true)}>{actor.name}</a></h3><CoverageDetails coverage={coverage} catalog={catalog} /></section>)}
+    {!catalog.current.actors.some(a=>a.kind==='person') && <p>Aucune personnalité dans le périmètre courant.</p>}
+  </section>)}
+</> : <p>Aucune question dans le périmètre courant.</p>}

@@ -1,0 +1,14 @@
+---
+import type { Publication } from '../content/publication-schema.ts';
+interface Props {publication:Publication;}
+const {publication}=Astro.props;
+const collection=publication.state==='available' ? publication.lastSuccessfulCollection : {state:'unknown'} as const;
+const published=publication.state==='available' ? publication.lastPublication : {state:'unknown'} as const;
+---
+<section aria-label="Dates de suivi" class="publication-dates">
+  <dl class="metadata">
+    <dt>Dernière collecte réussie</dt><dd>{collection.state==='known' ? <time datetime={collection.value}>{collection.value} (UTC)</time> : 'Non renseignée'}</dd>
+    <dt>Dernière publication</dt><dd>{published.state==='known' ? <time datetime={published.value}>{published.value} (UTC)</time> : 'Non renseignée'}</dd>
+  </dl>
+  {publication.state==='available' && <p>Périmètre de collecte : {publication.collectionScope}</p>}
+</section>

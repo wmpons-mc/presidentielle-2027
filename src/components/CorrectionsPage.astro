@@ -1,0 +1,9 @@
+---
+import type { Publication } from '../content/publication-schema.ts';
+import { recordPath } from '../site/catalog.ts';
+interface Props {publication:Publication;}
+const {publication}=Astro.props;
+const corrections=publication.state==='available' ? [...publication.corrections].sort((a,b)=>b.publishedAt.localeCompare(a.publishedAt) || a.id.localeCompare(b.id)) : [];
+---
+<p><a href="/methode/">Lire la méthode</a> · <a href="/couverture/">Consulter la couverture</a></p>
+{corrections.length ? <ol class="record-list">{corrections.map(c=><li id={c.id}><article><h2>Correction éditoriale</h2><p>Publiée le <time datetime={c.publishedAt}>{c.publishedAt} (UTC)</time></p><p>{c.summary}</p><p><a href={recordPath(c.collection,c.before,true)}>Avant — version {c.before.version}</a> · <a href={recordPath(c.collection,c.after,true)}>Après — version {c.after.version}</a></p></article></li>)}</ol> : <p>Aucune correction publiée n’est renseignée dans ce journal.</p>}

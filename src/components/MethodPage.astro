@@ -1,0 +1,11 @@
+---
+import type { Publication } from '../content/publication-schema.ts';
+interface Props {publication:Publication;}
+const {publication}=Astro.props;
+---
+<nav aria-label="Méthode et suivi"><ul class="record-list"><li><a href="/couverture/">Couverture par question et personnalité</a></li><li><a href="/corrections/">Corrections publiées</a></li></ul></nav>
+{publication.state==='available' ? <article class="prose">
+  <p>Version de la méthode : {publication.method.version}</p>
+  {[publication.method.definitions,publication.method.sources,publication.method.limits,publication.method.workflow,publication.responsibility,publication.funding].map(section=><section><h2>{section.title}</h2>{section.paragraphs.map(paragraph=><p>{paragraph}</p>)}</section>)}
+  {publication.method.references.length>0 && <section><h2>Références de la méthode</h2><ul>{publication.method.references.map(ref=><li><a href={ref.url} rel="noreferrer">{ref.title} ↗</a></li>)}</ul></section>}
+</article> : <p class="version-note">Aucun texte de méthode approuvé n’est disponible dans cette publication.</p>}
